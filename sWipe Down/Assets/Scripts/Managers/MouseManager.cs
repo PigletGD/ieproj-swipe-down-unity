@@ -82,7 +82,7 @@ public class MouseManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Did Not Hit");
+            //Debug.Log("Did Not Hit");
             //if (Input.GetMouseButtonDown(0)) GameEvents.current.MouseClickNoTarget();
         }
 
