@@ -58,7 +58,7 @@ public class PaperBehaviour : MonoBehaviour
         {
             isTorn = true;
             rb = gameObject.AddComponent<Rigidbody2D>();
-            Vector2 moveVector = new Vector2(0, -100 + (150 * TS.ScrollSpeed));
+            Vector2 moveVector = new Vector2(0, -100 + (300 * TS.ScrollSpeed));
             if (TS.holdingTP) moveVector *= 0.5f;
             rb.velocity = moveVector;
             gameManager.IncrementScore(1);

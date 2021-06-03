@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class EventVector3 : UnityEvent<Transform> { }
 
 public class MouseManager : MonoBehaviour
 {
+    public bool onMobile = false;
+
     public LayerMask clickableLayer;
 
     public Texture2D pointer = null;
@@ -48,6 +51,10 @@ public class MouseManager : MonoBehaviour
 
     private GameManager gameManager = null;
 
+    private bool isMovingMode = true;
+    private bool isHolding = false;
+    private Vector3 lastCursorPos = Vector3.zero;
+
     private void Awake()
     {
         //GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
@@ -57,6 +64,12 @@ public class MouseManager : MonoBehaviour
 
     void Update()
     {
+        if (!onMobile) MouseControls();
+        else MobileControls();
+    }
+
+    private void MouseControls()
+    {
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 200, clickableLayer.value))
         {
@@ -64,6 +77,13 @@ public class MouseManager : MonoBehaviour
 
             if (objectFollow != null)
             {
+                if (IsPointerOverUIObject())
+                {
+                    objectFollow.SetActive(false);
+                    return;
+                }
+                else objectFollow.SetActive(true);
+
                 cursorPos = new Vector3(Mathf.FloorToInt(hit.point.x / tileSize) * tileSize + (tileSize * 0.5f), 0f, Mathf.FloorToInt(hit.point.z / tileSize) * tileSize + (tileSize * 0.5f));
 
                 // Movement
@@ -78,41 +98,43 @@ public class MouseManager : MonoBehaviour
                         BuildingManager.instance.InstantiateBuilding(cursorPos);
                     }
                 }
-            }            
-        }
-        else
-        {
-            //Debug.Log("Did Not Hit");
-            //if (Input.GetMouseButtonDown(0)) GameEvents.current.MouseClickNoTarget();
+            }
         }
 
         // MOVING THROUGH MAP
-        if (Input.GetMouseButtonDown(2))
+        if (!IsPointerOverUIObject())
         {
-            Plane plane = new Plane(Vector3.up, Vector3.zero);
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            float entry;
-
-            if (plane.Raycast(ray, out entry)) dragStartPosition = ray.GetPoint(entry);
-        }
-        if (Input.GetMouseButton(2))
-        {
-            Plane plane = new Plane(Vector3.up, Vector3.zero);
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            float entry;
-
-            if (plane.Raycast(ray, out entry))
+            if (Input.GetMouseButtonDown(2))
             {
-                dragCurrentPosition = ray.GetPoint(entry);
-                newPosition = cameraRig.position + dragStartPosition - dragCurrentPosition;
-                //cameraRig.position = new Vector3(newPosition.x, cameraRig.position.y, newPosition.z);
-            }
+                Plane plane = new Plane(Vector3.up, Vector3.zero);
 
-            cameraRig.position = Vector3.Lerp(cameraRig.position, newPosition, Time.deltaTime * cameraMovementTime);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                float entry;
+
+                if (plane.Raycast(ray, out entry)) dragStartPosition = ray.GetPoint(entry);
+            }
+            if (Input.GetMouseButton(2))
+            {
+                Plane plane = new Plane(Vector3.up, Vector3.zero);
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                float entry;
+
+                if (plane.Raycast(ray, out entry))
+                {
+                    dragCurrentPosition = ray.GetPoint(entry);
+                    newPosition = cameraRig.position + dragStartPosition - dragCurrentPosition;
+                    //cameraRig.position = new Vector3(newPosition.x, cameraRig.position.y, newPosition.z);
+                }
+
+                cameraRig.position = Vector3.Lerp(cameraRig.position, newPosition, Time.deltaTime * cameraMovementTime);
+            }
+            else
+            {
+                cameraRig.position = Vector3.Lerp(cameraRig.position, newPosition, Time.deltaTime * cameraMovementTime * 0.5f);
+            }
         }
         else
         {
@@ -122,7 +144,7 @@ public class MouseManager : MonoBehaviour
         // ZOOMING IN
         if (Input.GetAxis("Mouse ScrollWheel") < 0f) // forward
         {
-            if(zoomAmount < zoomMax)
+            if (zoomAmount < zoomMax)
             {
                 mainCam.orthographicSize += 1;
                 zoomAmount++;
@@ -136,71 +158,126 @@ public class MouseManager : MonoBehaviour
                 zoomAmount--;
             }
         }
-
-        //cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * cameraMovementTime);
-
-        /*if (currentlyPlacing != null)
-        {
-            Plane plane = new Plane(Vector3.up, Vector3.zero);
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            float entry;
-
-            Transform placing = currentlyPlacing.transform;
-
-            if (plane.Raycast(ray, out entry))
-            {
-                placing.position = ray.GetPoint(entry);
-                placing.position = new Vector3(Mathf.Round(placing.position.x) - 0.5f, placing.position.y, Mathf.Round(placing.position.z) - 0.5f);
-            }
-
-
-        }*/
     }
 
-    /*private Transform GetClosetWaypoint(RaycastHit hit)
+    private void MobileControls()
     {
-        Debug.Log(hit.collider.gameObject.name);
+        if (isMovingMode) MoveCam();
+        else BuildTower();
+    }
 
-        Transform[] waypoints = hit.collider.gameObject.GetComponent<WaypointHandler>().waypoints;
-
-        Transform targetTransform = player.transform;
-        float shortestDistance = Mathf.Infinity;
-        float currentDistance = Mathf.Infinity;
-
-        foreach (Transform waypoint in waypoints)
+    private void MoveCam()
+    {
+        // MOVING THROUGH MAP
+        if (!IsPointerOverUIObject())
         {
-            if (!waypoint.gameObject.activeSelf) continue;
-
-            currentDistance = Vector3.SqrMagnitude(waypoint.position - player.transform.position);
-
-            if (currentDistance < shortestDistance)
+            if (Input.GetMouseButtonDown(0))
             {
-                shortestDistance = currentDistance;
-                targetTransform = waypoint;
+                Plane plane = new Plane(Vector3.up, Vector3.zero);
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                float entry;
+
+                if (plane.Raycast(ray, out entry)) dragStartPosition = ray.GetPoint(entry);
+            }
+            if (Input.GetMouseButton(0))
+            {
+                Plane plane = new Plane(Vector3.up, Vector3.zero);
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                float entry;
+
+                if (plane.Raycast(ray, out entry))
+                {
+                    dragCurrentPosition = ray.GetPoint(entry);
+                    newPosition = cameraRig.position + dragStartPosition - dragCurrentPosition;
+                    //cameraRig.position = new Vector3(newPosition.x, cameraRig.position.y, newPosition.z);
+                }
+
+                cameraRig.position = Vector3.Lerp(cameraRig.position, newPosition, Time.deltaTime * cameraMovementTime);
+            }
+            else
+            {
+                cameraRig.position = Vector3.Lerp(cameraRig.position, newPosition, Time.deltaTime * cameraMovementTime * 0.5f);
             }
         }
-
-        return targetTransform;
+        else
+        {
+            cameraRig.position = Vector3.Lerp(cameraRig.position, newPosition, Time.deltaTime * cameraMovementTime * 0.5f);
+        }
     }
 
-    void ReachedDestination()
+    private void BuildTower()
     {
-        reachedDestination = true;
-        currentlySelected.GetComponent<ClickableObject>().TurnOn();
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 200, clickableLayer.value))
+        {
+            Vector3 cursorPos;
+
+            if (objectFollow != null)
+            {
+                if (Input.GetMouseButton(0))
+                {
+                    if (!isHolding) isHolding = true;
+
+                    if (IsPointerOverUIObject())
+                    {
+                        objectFollow.SetActive(false);
+                        return;
+                    }
+                    else objectFollow.SetActive(true);
+
+                    cursorPos = new Vector3(Mathf.FloorToInt(hit.point.x / tileSize) * tileSize + (tileSize * 0.5f), 0f, Mathf.FloorToInt(hit.point.z / tileSize) * tileSize + (tileSize * 0.5f));
+
+                    // Movement
+                    objectFollow.transform.position = cursorPos;
+
+                    lastCursorPos = cursorPos;
+                }
+                // Input
+                if (Input.GetMouseButtonUp(0))
+                {
+                    if (isHolding) isHolding = false;
+
+                    int x = (int)(lastCursorPos.x - 0.5f);
+                    int y = (int)(lastCursorPos.z - 0.5f);
+
+                    if (CheckLimits(x, y)) BuildingManager.instance.InstantiateBuilding(lastCursorPos);
+                    else objectFollow.SetActive(false);
+
+                }
+
+                if (!isHolding && objectFollow != null) objectFollow.SetActive(false);
+            }
+        }
     }
 
-    void ResetVariables()
+    private bool CheckLimits(int x, int y)
     {
-        reachedDestination = false;
-        currentlySelected.GetComponent<ClickableObject>().TurnOff();
-    }
-    */
+        if (x >= -2 && x <= 2 && y >= -2 && y <= 2)
+            return false;
 
-    void DeletePlacingInstance()
+        return true;
+    }
+
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
+
+    private void DeletePlacingInstance()
     {
         Destroy(currentlyPlacing);
         currentlyPlacing = null;
     }
+
+    public void TurnOnMovingMode() => isMovingMode = true;
+
+    public void TurnOnBuildingMode() => isMovingMode = false;
 }

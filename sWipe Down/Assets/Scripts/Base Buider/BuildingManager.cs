@@ -45,7 +45,9 @@ public class BuildingManager : MonoBehaviour
 
         string key = x.ToString() + " " + y.ToString();
 
-        if (!buildingDictionary.ContainsKey(key))
+        Debug.Log("Building");
+
+        if (CheckLimits(x, y) && !buildingDictionary.ContainsKey(key))
         {
             GameObject go = Instantiate(currentBuilding.buildingPrefab, position, Quaternion.Euler(0, -90, 0));
             TowerBehaviour tb = go.GetComponent<TowerBehaviour>();
@@ -55,6 +57,14 @@ public class BuildingManager : MonoBehaviour
 
             if (gameManager.Currency < currentBuilding.buildingCost) ChangeCurrentlySelectedBuilding(-1);
         }
+    }
+    
+    private bool CheckLimits(int x, int y)
+    {
+        if (x >= -2 && x <= 2 && y >= -2 && y <= 2)
+            return false;
+
+        return true;
     }
 
     public void RemoveBuildingFromDictionary(string key)

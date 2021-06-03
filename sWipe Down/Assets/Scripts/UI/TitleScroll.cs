@@ -30,8 +30,10 @@ public class TitleScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private void Update()
     {
+        Debug.Log("On Update");
         if (isDragging)
         {
+            Debug.Log("Dragging");
             initialClickPos = currentClickPos;
             currentClickPos = Input.mousePosition;
         }
@@ -42,6 +44,8 @@ public class TitleScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        Debug.Log("True?");
+
         isDragging = true;
 
         initialClickPos = Input.mousePosition;

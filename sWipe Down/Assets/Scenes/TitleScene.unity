@@ -767,7 +767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialClickPos: {x: 0, y: 0, z: 0}
   currentClickPos: {x: 0, y: 0, z: 0}
-  camMain: {fileID: 0}
+  camMain: {fileID: 734713269}
   rectTransform: {fileID: 1803843823}
 --- !u!114 &1803843827
 MonoBehaviour:
