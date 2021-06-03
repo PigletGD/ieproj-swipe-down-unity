@@ -3,7 +3,12 @@ guid: 588798f465d9e0742a7e5dd3c77f9bf9
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: JA_Midterms_121720_BidetTower_colormap
+    second: {fileID: 2800000, guid: 20be216e801a2d64983b438dfeccfa86, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

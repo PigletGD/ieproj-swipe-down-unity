@@ -3,7 +3,27 @@ guid: 6c47f23fff57fe641bb27600fc224af9
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: DT_Midterms_121720_wall_bumpmap
+    second: {fileID: 2800000, guid: 12956c102a1676b418ee0ecec6b8c399, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: DT_Midterms_121720_wall_colormap
+    second: {fileID: 2800000, guid: e1b0fc0b4f4f71740b83ca6e551bf7f0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: DT_Midterms_121720_wall_specularmap
+    second: {fileID: 2800000, guid: 4698fed72037fa74289ab10115217b78, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: DT_Midterms_121720_wall_transparencymap
+    second: {fileID: 2800000, guid: 638176b6a165fb9439a24038e1c350ce, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
