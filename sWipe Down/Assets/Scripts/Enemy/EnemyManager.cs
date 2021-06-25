@@ -68,12 +68,12 @@ public class EnemyManager : MonoBehaviour
         {
             waveOngoing = false;
 
-            if (minTimer > 20) minTimer -= 10;
-            if (maxTimer > 20) maxTimer -= 10;
+            if (minTimer > 10) minTimer -= 3;
+            if (maxTimer > 10) maxTimer -= 3;
 
             timerForNextSpawn = Random.Range(minTimer, maxTimer);
 
-            if (spawnCount < 30) spawnCount += 3;
+            if (spawnCount < 30) spawnCount += 2;
 
             if (radius < 25) radius++;
 
