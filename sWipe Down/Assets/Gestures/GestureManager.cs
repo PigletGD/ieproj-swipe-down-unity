@@ -63,7 +63,7 @@ public class GestureManager : MonoBehaviour
 
     private void FireTapEvent(Vector2 pos)
     {
-        Debug.Log("Tap!");
+        //Debug.Log("Tap!");
         if (onTap != null)
         {
             TapEventArgs tapArgs = new TapEventArgs(pos);
