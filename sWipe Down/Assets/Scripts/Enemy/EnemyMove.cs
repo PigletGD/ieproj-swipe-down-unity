@@ -21,10 +21,16 @@ public class EnemyMove : MonoBehaviour
         baseBuilding = GameObject.FindGameObjectWithTag("Base").transform;
         target = baseBuilding;
 
+        owner = transform;
+    }
+
+    private void OnEnable()
+    {
+        baseBuilding = GameObject.FindGameObjectWithTag("Base").transform;
+        target = baseBuilding;
+
         targetList = new List<Transform>();
         targetedList = new List<Transform>();
-
-        owner = transform;
     }
 
     private void OnCollisionStay(Collision collision)
@@ -49,7 +55,7 @@ public class EnemyMove : MonoBehaviour
             rb.MovePosition(owner.position + (owner.forward * speed * Time.deltaTime));
             
         }
-        else Debug.LogError("ERROR: NOT SUPPOSED TO BE HERE");
+        else Debug.LogWarning("ERROR: NOT SUPPOSED TO BE HERE");
     }
 
     public void AddTarget(Transform foundTarget)

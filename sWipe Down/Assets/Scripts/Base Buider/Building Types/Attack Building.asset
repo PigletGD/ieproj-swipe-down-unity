@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingPrefab: {fileID: 7800365577940988191, guid: a5047ad74ea6f4940b16f1504f903934,
     type: 3}
-  buildingCost: 15
+  buildingCost: 0
   buildingIcon: {fileID: 21300000, guid: f39fe41e13e92c54c9fe39060ef30fde, type: 3}

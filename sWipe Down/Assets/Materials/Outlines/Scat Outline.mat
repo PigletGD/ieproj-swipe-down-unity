@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-461294199495147408
+--- !u!114 &-6242055215761617406
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Red Toon
-  m_Shader: {fileID: -6465566751694194690, guid: 27ee05c00727d7546a5972f25c2846be,
+  m_Name: Scat Outline
+  m_Shader: {fileID: -6465566751694194690, guid: 51a4817cddf5efb41a952525e9b51916,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -33,18 +33,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_880f0421fbf94619ada7f198cf1152d8:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_92222f8220f0463d98b9eaf62e4e5d01:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_b45e86dab730492a9379a92c3359c830:
-        m_Texture: {fileID: 2800000, guid: e62681c756bb2c042ab285b66ffbef80, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -102,6 +90,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_b029ca6c401e402da9f06ef7017da394: 0.004
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -129,10 +118,6 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_0f6b4091ff434ad28cd084dc0f47bd55: {r: 0.99215686, g: 0.58431375, b: 0.58431375,
-        a: 0}
-    - Vector2_020fb3c5f087468283eb1eba7eafdadc: {r: 0, g: 0, b: 0, a: 0}
-    - Vector2_1e6a879340b743e6a01cc1f639e2fcd8: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

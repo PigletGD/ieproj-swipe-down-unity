@@ -19,8 +19,9 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] GameEventsSO onEnemyKilled = null;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
+        deadAlready = false;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -65,13 +66,15 @@ public class HealthComponent : MonoBehaviour
         }
 
         // make mesh invisible
-        mr.enabled = false;
+        //mr.enabled = false;
 
-        gameObject.tag = "Untagged";
+        //gameObject.tag = "Untagged";
 
         if (!isEnemy && entity.tag != "Base") BuildingManager.instance.RemoveBuildingFromDictionary(gameObject.GetComponent<TowerBehaviour>().key);
 
-        Destroy(gameObject);
+        PooledObject pooled = gameObject.GetComponent<PooledObject>();
+        if (pooled != null) pooled.ReturnObject();
+        else Destroy(gameObject);
 
         // StartCoroutine("Death");
     }

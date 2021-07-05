@@ -10,10 +10,16 @@ public class HealthBar : MonoBehaviour
     [SerializeField] Gradient gradient = null;
 
     [SerializeField] Image fill = null;
+    [SerializeField] Image background = null;
+    [SerializeField] Image border = null;
+
+    public void OnEnable() => SetImageEnable(false);
 
     public void SetHealth(int health)
     {
         StopAllCoroutines();
+
+        SetImageEnable(true);
 
         StartCoroutine(SlideHealth(health));
     }
@@ -38,5 +44,12 @@ public class HealthBar : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private void SetImageEnable(bool value)
+    {
+        fill.gameObject.SetActive(value);
+        background.gameObject.SetActive(value);
+        border.gameObject.SetActive(value);
     }
 }

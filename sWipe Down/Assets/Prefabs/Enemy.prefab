@@ -174,6 +174,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 0f52d37d68caebc46abbefef5dca4762, type: 2}
+  - {fileID: 2100000, guid: c2d5333b7ec750741848472482b5dc6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -768,3 +769,5 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   fill: {fileID: 7492998019372838313}
+  background: {fileID: 7757346085425033541}
+  border: {fileID: 5252748874530872001}

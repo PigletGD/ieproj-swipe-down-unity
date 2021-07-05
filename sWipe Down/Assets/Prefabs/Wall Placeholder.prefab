@@ -214,6 +214,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 53d4ebc0d010452498c314908d344e24, type: 2}
+  - {fileID: 2100000, guid: 267470415a925e445a6861cd68f91773, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -494,6 +495,8 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   fill: {fileID: 4240010916572371137}
+  background: {fileID: 895173993926010786}
+  border: {fileID: 7268630298203526241}
 --- !u!1 &8863875213828776298
 GameObject:
   m_ObjectHideFlags: 0
