@@ -2433,6 +2433,7 @@ GameObject:
   - component: {fileID: 1261006630}
   - component: {fileID: 1261006629}
   - component: {fileID: 1261006628}
+  - component: {fileID: 1261006631}
   m_Layer: 5
   m_Name: Build Mode Button
   m_TagString: Untagged
@@ -2565,6 +2566,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261006626}
   m_CullTransparentMesh: 0
+--- !u!114 &1261006631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261006626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8c7ab305384214c9498b31f9890023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  androidSpecific: 1
 --- !u!1 &1262379198
 GameObject:
   m_ObjectHideFlags: 0
@@ -2979,13 +2993,14 @@ GameObject:
   - component: {fileID: 1406242288}
   - component: {fileID: 1406242287}
   - component: {fileID: 1406242286}
+  - component: {fileID: 1406242290}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1406242285
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3112,6 +3127,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406242284}
   m_CullTransparentMesh: 0
+--- !u!114 &1406242290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406242284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8c7ab305384214c9498b31f9890023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  androidSpecific: 0
 --- !u!1 &1463975390
 GameObject:
   m_ObjectHideFlags: 0
@@ -3453,7 +3481,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b91bd9ee1d66340a306d7941bc997d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMobile: 1
   clickableLayer:
     serializedVersion: 2
     m_Bits: 288
@@ -4315,6 +4342,7 @@ GameObject:
   - component: {fileID: 2020534929}
   - component: {fileID: 2020534928}
   - component: {fileID: 2020534927}
+  - component: {fileID: 2020534930}
   m_Layer: 5
   m_Name: Move Mode Button
   m_TagString: Untagged
@@ -4447,6 +4475,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020534925}
   m_CullTransparentMesh: 0
+--- !u!114 &2020534930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020534925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8c7ab305384214c9498b31f9890023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  androidSpecific: 1
 --- !u!1 &2102454524
 GameObject:
   m_ObjectHideFlags: 0

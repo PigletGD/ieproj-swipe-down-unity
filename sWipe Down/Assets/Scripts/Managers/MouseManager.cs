@@ -8,7 +8,7 @@ public class EventVector3 : UnityEvent<Transform> { }
 
 public class MouseManager : MonoBehaviour
 {
-    public bool onMobile = false;
+    private bool onMobile = false;
 
     public LayerMask clickableLayer;
 
@@ -57,6 +57,12 @@ public class MouseManager : MonoBehaviour
 
     private void Awake()
     {
+#if UNITY_ANDROID
+        onMobile = true;
+#else
+        onMobile = false;
+#endif
+
         //GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
         newPosition = cameraRig.position;
         gameManager = FindObjectOfType<GameManager>();
