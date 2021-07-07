@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TestScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class TestScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] private float setScrollSpeed = -50.0f;
+
     public bool holdingTP = false;
+    public bool onScrollArea = false;
     public Vector3 initialClickPos = Vector3.zero;
     public Vector3 currentClickPos = Vector3.zero;
     public Camera camMain;
@@ -26,7 +29,24 @@ public class TestScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             currentClickPos = camMain.ScreenToWorldPoint(Input.mousePosition); 
         }
 
+        CheckScroll();
+
         UpdateScrollSpeed();
+    }
+
+    public void CheckScroll()
+    {
+        if (onScrollArea)
+        {
+            if (Input.GetAxis("Mouse ScrollWheel") < 0f) // forward
+            {
+                ScrollSpeed = setScrollSpeed;
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") > 0f) // backwards
+            {
+                ScrollSpeed = 0.5f;
+            }
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -40,6 +60,16 @@ public class TestScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void OnPointerUp(PointerEventData eventData)
     {
         holdingTP = false;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        onScrollArea = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        onScrollArea = false;
     }
 
     public void UpdateScrollSpeed()

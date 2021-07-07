@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Scat Outline
+  m_Name: Holy Seat Outline
   m_Shader: {fileID: -6465566751694194690, guid: 51a4817cddf5efb41a952525e9b51916,
     type: 3}
   m_ShaderKeywords: 
@@ -90,7 +90,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_b029ca6c401e402da9f06ef7017da394: 0.004
+    - Vector1_b029ca6c401e402da9f06ef7017da394: 0.01
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

@@ -141,29 +141,31 @@ public class MouseManager : MonoBehaviour
             {
                 cameraRig.position = Vector3.Lerp(cameraRig.position, newPosition, Time.deltaTime * cameraMovementTime * 0.5f);
             }
+
+            // ZOOMING IN
+            if (Input.GetAxis("Mouse ScrollWheel") < 0f) // forward
+            {
+                if (zoomAmount < zoomMax)
+                {
+                    mainCam.orthographicSize += 1;
+                    zoomAmount++;
+                }
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") > 0f) // backwards
+            {
+                if (zoomAmount > zoomMin)
+                {
+                    mainCam.orthographicSize -= 1;
+                    zoomAmount--;
+                }
+            }
         }
         else
         {
             cameraRig.position = Vector3.Lerp(cameraRig.position, newPosition, Time.deltaTime * cameraMovementTime * 0.5f);
         }
 
-        // ZOOMING IN
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f) // forward
-        {
-            if (zoomAmount < zoomMax)
-            {
-                mainCam.orthographicSize += 1;
-                zoomAmount++;
-            }
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") > 0f) // backwards
-        {
-            if (zoomAmount > zoomMin)
-            {
-                mainCam.orthographicSize -= 1;
-                zoomAmount--;
-            }
-        }
+        
     }
 
     private void MobileControls()
