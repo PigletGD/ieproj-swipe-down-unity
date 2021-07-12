@@ -6,6 +6,11 @@ public class TPGenerationBehaviour : TowerBehaviour
 {
     [SerializeField] private GameManager manager;
     private int basegain = 10;
+
+    private void Start()
+    {
+        manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+    }
     public override void ExecuteAction()
     {
         manager.IncrementScore(basegain);
