@@ -5,12 +5,14 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     public float speed = 0;
+    public float maxSpeed = 0;
     public Transform owner = null;
     public Rigidbody rb = null;
     public Transform baseBuilding = null;
     public Transform target = null;
     public List<Transform> targetList = null;
     public List<Transform> targetedList = null;
+    public List<StatusEffect> statusEffectsList = null;
 
     private float timeElapsed = 0f;
     [SerializeField] float attackRate = 0f;
@@ -31,6 +33,7 @@ public class EnemyMove : MonoBehaviour
 
         targetList = new List<Transform>();
         targetedList = new List<Transform>();
+        statusEffectsList = new List<StatusEffect>();
     }
 
     private void OnCollisionStay(Collision collision)
@@ -46,6 +49,8 @@ public class EnemyMove : MonoBehaviour
     void FixedUpdate()
     {
         timeElapsed += Time.deltaTime;
+
+        ApplyStatusEffects(timeElapsed);
 
         if (target != null)
         {
@@ -82,6 +87,31 @@ public class EnemyMove : MonoBehaviour
             {
                 TowerBehaviour tb = targeted.GetComponent<TowerBehaviour>();
                 if (tb != null) tb.RemoveTarget(transform);
+            }
+        }
+    }
+
+    public void AddStatusEffect(StatusEffect statusEffect)
+    {
+        statusEffectsList.Add(statusEffect);
+    }
+
+    private void ApplyStatusEffects(float deltaTime)
+    {
+        speed = maxSpeed;
+
+        foreach (StatusEffect statusEffect in statusEffectsList)
+        {
+            statusEffect.ApplyEffect(this.gameObject);
+            if (statusEffect.durationType == Duration.INSTANTANEOUS)
+            {
+                statusEffectsList.Remove(statusEffect);
+            }
+            else if (statusEffect.durationType == Duration.LASTING)
+            {
+                statusEffect.duration -= deltaTime;
+                if(statusEffect.duration <= 0)
+                    statusEffectsList.Remove(statusEffect);
             }
         }
     }

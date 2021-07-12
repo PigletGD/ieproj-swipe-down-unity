@@ -326,6 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  maxSpeed: 1
   owner: {fileID: 6300176592904248710}
   rb: {fileID: 6300176592904248706}
   baseBuilding: {fileID: 0}
