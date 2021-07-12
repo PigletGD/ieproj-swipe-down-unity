@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1256980764606917140}
   - component: {fileID: 1256980764606917131}
+  - component: {fileID: 6568847706112423946}
   m_Layer: 0
   m_Name: Vision
   m_TagString: Untagged
@@ -39,11 +40,25 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256980764606917141}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6568847706112423946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256980764606917141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9633a243be721c9498586e79c0b05933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: -1829322506839618107}
+  towerTransform: {fileID: 1655926243718906291}
 --- !u!1 &2139447908903983881
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,8 +70,9 @@ GameObject:
   - component: {fileID: 1655926243718906291}
   - component: {fileID: 2401777255993036310}
   - component: {fileID: 481925814259235548}
+  - component: {fileID: -1829322506839618107}
   m_Layer: 0
-  m_Name: building_draintile
+  m_Name: Drain_Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,3 +142,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-1829322506839618107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139447908903983881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7361844ac601c24cbed426f190760a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  targetList: []
+  targetedList: []
+  fireRate: 1
+  key: 
