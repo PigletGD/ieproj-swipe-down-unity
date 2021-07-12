@@ -9,7 +9,7 @@ public abstract class TowerBehaviour : MonoBehaviour
     public List<Transform> targetedList = null;
 
     protected float time = 0.0f;
-    public int fireRate = 1;
+    public float fireRate = 1.0f;
 
     public string key = "";
 
