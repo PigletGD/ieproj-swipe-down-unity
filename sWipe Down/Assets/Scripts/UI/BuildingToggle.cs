@@ -12,14 +12,12 @@ public class BuildingToggle : MonoBehaviour, IPointerDownHandler
     [SerializeField] RectTransform parent = null;
     [SerializeField] RectTransform rectTransform = null;
 
-    [SerializeField] CanvasScaler canvas = null;
     [SerializeField] LayoutElement LE = null;
 
     private bool toggleOn = true;
     // Start is called before the first frame update
     void Start()
     {
-
         toggleOnPosition = new Vector2(0, 0);
         toggleOffPosition = new Vector2(0, -LE.minHeight);
     }

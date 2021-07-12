@@ -8,7 +8,7 @@ public class EventVector3 : UnityEvent<Transform> { }
 
 public class MouseManager : MonoBehaviour
 {
-    public bool onMobile = false;
+    private bool onMobile = false;
 
     public LayerMask clickableLayer;
 
@@ -57,6 +57,12 @@ public class MouseManager : MonoBehaviour
 
     private void Awake()
     {
+#if UNITY_ANDROID
+        onMobile = true;
+#else
+        onMobile = false;
+#endif
+
         //GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
         newPosition = cameraRig.position;
         gameManager = FindObjectOfType<GameManager>();
@@ -86,16 +92,25 @@ public class MouseManager : MonoBehaviour
 
                 cursorPos = new Vector3(Mathf.FloorToInt(hit.point.x / tileSize) * tileSize + (tileSize * 0.5f), 0f, Mathf.FloorToInt(hit.point.z / tileSize) * tileSize + (tileSize * 0.5f));
 
-                // Movement
-                objectFollow.transform.position = cursorPos;
-
-                // Input
-                if (Input.GetMouseButtonDown(0))
+                if (BuildingManager.instance.CheckIfTileOccupied(cursorPos))
                 {
-                    // Do world stuff here
-                    if (!onUI)
+                    objectFollow.SetActive(false);
+                }
+                else
+                {
+                    objectFollow.SetActive(true);
+
+                    // Movement
+                    objectFollow.transform.position = cursorPos;
+
+                    // Input
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        BuildingManager.instance.InstantiateBuilding(cursorPos);
+                        // Do world stuff here
+                        if (!IsPointerOverUIObject())
+                        {
+                            BuildingManager.instance.InstantiateBuilding(cursorPos);
+                        }
                     }
                 }
             }
@@ -135,29 +150,31 @@ public class MouseManager : MonoBehaviour
             {
                 cameraRig.position = Vector3.Lerp(cameraRig.position, newPosition, Time.deltaTime * cameraMovementTime * 0.5f);
             }
+
+            // ZOOMING IN
+            if (Input.GetAxis("Mouse ScrollWheel") < 0f) // forward
+            {
+                if (zoomAmount < zoomMax)
+                {
+                    mainCam.orthographicSize += 1;
+                    zoomAmount++;
+                }
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") > 0f) // backwards
+            {
+                if (zoomAmount > zoomMin)
+                {
+                    mainCam.orthographicSize -= 1;
+                    zoomAmount--;
+                }
+            }
         }
         else
         {
             cameraRig.position = Vector3.Lerp(cameraRig.position, newPosition, Time.deltaTime * cameraMovementTime * 0.5f);
         }
 
-        // ZOOMING IN
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f) // forward
-        {
-            if (zoomAmount < zoomMax)
-            {
-                mainCam.orthographicSize += 1;
-                zoomAmount++;
-            }
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") > 0f) // backwards
-        {
-            if (zoomAmount > zoomMin)
-            {
-                mainCam.orthographicSize -= 1;
-                zoomAmount--;
-            }
-        }
+        
     }
 
     private void MobileControls()
