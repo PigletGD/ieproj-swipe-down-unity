@@ -5,7 +5,7 @@ using UnityEngine;
 public class TPGenerationBehaviour : TowerBehaviour
 {
     [SerializeField] private GameManager manager;
-    private int basegain = 10;
+    [SerializeField] private int basegain = 10;
 
     private void Start()
     {
