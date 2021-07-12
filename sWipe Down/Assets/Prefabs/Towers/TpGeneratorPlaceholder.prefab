@@ -287,6 +287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2872097289944362114}
   - component: {fileID: 8027789216148586758}
+  - component: {fileID: -3712869389303099054}
   m_Layer: 0
   m_Name: TpGeneratorPlaceholder
   m_TagString: Untagged
@@ -330,6 +331,24 @@ MonoBehaviour:
   fireRate: 1
   key: 
   manager: {fileID: 0}
+--- !u!114 &-3712869389303099054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3211187378551961144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3c2a77a491f2446ab4c26121487d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  isEnemy: 0
+  entity: {fileID: 3211187378551961144}
+  mr: {fileID: 0}
+  healthBar: {fileID: 2477820488392286553}
+  onEnemyKilled: {fileID: 0}
 --- !u!1 &4307996652269335923
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,3 +727,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5070504629779688670}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2477820488392286553 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7222913450328149383, guid: 008b9cb1f06e5e346919f3959db6cbac,
+    type: 3}
+  m_PrefabInstance: {fileID: 5070504629779688670}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3386b88420c221b41b80edfc32e5d80b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
