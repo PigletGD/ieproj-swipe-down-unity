@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] List<GameObject> enemyTypes = null;
     [SerializeField] ObjectPool basicEnemyPool = default;
     [SerializeField] int initialSpawnCount = 0;
     [SerializeField] float spawnRadius = 0f;
@@ -56,7 +55,6 @@ public class EnemyManager : MonoBehaviour
             GO = basicEnemyPool.GetObject();
             if (GO == null) Debug.Log("Cringe");
             GO.transform.position = RandomCircle();
-            //Instantiate(enemyTypes[0], RandomCircle(), Quaternion.identity);
         }
 
         remainingEnemies = spawnCount;

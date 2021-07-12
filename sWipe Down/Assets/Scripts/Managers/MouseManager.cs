@@ -92,16 +92,25 @@ public class MouseManager : MonoBehaviour
 
                 cursorPos = new Vector3(Mathf.FloorToInt(hit.point.x / tileSize) * tileSize + (tileSize * 0.5f), 0f, Mathf.FloorToInt(hit.point.z / tileSize) * tileSize + (tileSize * 0.5f));
 
-                // Movement
-                objectFollow.transform.position = cursorPos;
-
-                // Input
-                if (Input.GetMouseButtonDown(0))
+                if (BuildingManager.instance.CheckIfTileOccupied(cursorPos))
                 {
-                    // Do world stuff here
-                    if (!onUI)
+                    objectFollow.SetActive(false);
+                }
+                else
+                {
+                    objectFollow.SetActive(true);
+
+                    // Movement
+                    objectFollow.transform.position = cursorPos;
+
+                    // Input
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        BuildingManager.instance.InstantiateBuilding(cursorPos);
+                        // Do world stuff here
+                        if (!IsPointerOverUIObject())
+                        {
+                            BuildingManager.instance.InstantiateBuilding(cursorPos);
+                        }
                     }
                 }
             }

@@ -1,20 +1,17 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerBehaviour : MonoBehaviour
+public abstract class TowerBehaviour : MonoBehaviour
 {
-    public Transform target =  null;
+    public Transform target = null;
     public List<Transform> targetList = null;
     public List<Transform> targetedList = null;
-    public bool isAttackTower;
-    [SerializeField] GameObject bullet;
-    [SerializeField] GameObject spawnpoint;
-    private float time = 0.0f;
-    private int firerate = 1;
+
+    protected float time = 0.0f;
+    public int fireRate = 1;
 
     public string key = "";
-    // Start is called before the first frame update
 
     void Start()
     {
@@ -22,25 +19,18 @@ public class TowerBehaviour : MonoBehaviour
         targetedList = new List<Transform>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (isAttackTower)
-        {
-            time += Time.deltaTime;
+    void Update() => ReadyAction();
 
-            if (target != null)
-            {
-                Vector3 direction = new Vector3(target.position.x, 0f, target.position.z);
-                transform.LookAt(direction);
-                if (time >= firerate)
-                {
-                    time = 0;
-                    GameObject temp = Instantiate(bullet, spawnpoint.transform.position, Quaternion.identity);
-                    temp.transform.LookAt(direction);
-                }
-            }
-        }
+    public abstract void ExecuteAction();
+
+    public abstract bool ReadyToExecuteAction();
+
+    public void ReadyAction()
+    {
+        time += Time.deltaTime;
+        if (!ReadyToExecuteAction()) return;
+        ExecuteAction();
+        time = 0;
     }
 
     public void AddTarget(Transform foundTarget)

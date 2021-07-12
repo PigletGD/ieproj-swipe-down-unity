@@ -10,6 +10,9 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] BuildingSO baseBuilding = null;
     [SerializeField] List<BuildingSO> buildingTypes = null;
     private Dictionary<string, GameObject> buildingDictionary = null;
+    private int currentBuildingType = -1;
+    [SerializeField] Transform objectPoolParent = null;
+    private List<ObjectPool> objectPools = new List<ObjectPool>();
 
     private BuildingSO currentBuilding = null;
 
@@ -22,7 +25,6 @@ public class BuildingManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            //DontDestroyOnLoad(gameObject);
         }
 
         InitializeGame();
@@ -33,9 +35,28 @@ public class BuildingManager : MonoBehaviour
         buildingDictionary = new Dictionary<string, GameObject>();
 
         GameObject go = Instantiate(baseBuilding.buildingPrefab, new Vector3(0.5f, 0.0f, 0.5f), Quaternion.identity);
-        buildingDictionary.Add("0 0", go);
+
+        for (int x = -2; x <= 2; x++)
+            for (int y = -2; y <= 2; y++)
+                buildingDictionary.Add(x.ToString() + " " + y.ToString(), go);
 
         gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+
+        CreateBuildingPools();
+    }
+
+    private void CreateBuildingPools()
+    {
+        for (int i = 0; i < buildingTypes.Count; i++)
+        {
+            GameObject GO = Instantiate(new GameObject(), objectPoolParent);
+            GO.name = "Building Pool " + i.ToString();
+
+            ObjectPool OP = GO.AddComponent<ObjectPool>();
+            OP.SetUpPool(buildingTypes[i].buildingPrefab, buildingTypes[i].initialPoolSize);
+            OP.InstantiateInitialObjects();
+            objectPools.Add(OP);
+        }
     }
 
     public void InstantiateBuilding(Vector3 position)
@@ -45,21 +66,33 @@ public class BuildingManager : MonoBehaviour
 
         string key = x.ToString() + " " + y.ToString();
 
-        Debug.Log("Building");
-
         if (CheckLimits(x, y) && !buildingDictionary.ContainsKey(key))
         {
-            GameObject go = Instantiate(currentBuilding.buildingPrefab, position, Quaternion.Euler(0, -90, 0));
-            TowerBehaviour tb = go.GetComponent<TowerBehaviour>();
-            if (tb != null) { tb.key = key; Debug.Log(key); }
-            buildingDictionary.Add(key, go);
+            //GameObject go = Instantiate(currentBuilding.buildingPrefab, new Vector3(position.x, 0.0f, position.z), Quaternion.identity);
+            GameObject GO = objectPools[currentBuildingType].GetObject();
+            GO.transform.position = new Vector3(position.x, 0.0f, position.z);
+            GO.tag = "Building";
+
+            TowerBehaviour TB = GO.GetComponent<TowerBehaviour>();
+            if (TB != null) TB.key = key;
+            buildingDictionary.Add(key, GO);
             gameManager.SpendCurrency(currentBuilding.buildingCost);
 
             if (gameManager.Currency < currentBuilding.buildingCost) ChangeCurrentlySelectedBuilding(-1);
         }
     }
     
-    private bool CheckLimits(int x, int y)
+    public bool CheckIfTileOccupied(Vector3 position)
+    {
+        int x = (int)(position.x - 0.5f);
+        int y = (int)(position.z - 0.5f);
+
+        string key = x.ToString() + " " + y.ToString();
+
+        return buildingDictionary.ContainsKey(key);
+    }
+
+    public bool CheckLimits(int x, int y)
     {
         if (x >= -2 && x <= 2 && y >= -2 && y <= 2)
             return false;
@@ -69,6 +102,7 @@ public class BuildingManager : MonoBehaviour
 
     public void RemoveBuildingFromDictionary(string key)
     {
+        Debug.Log("Removing " + key);
         buildingDictionary.Remove(key);
     }
 
@@ -76,22 +110,40 @@ public class BuildingManager : MonoBehaviour
     {
         if (index < 0 || index >= buildingTypes.Count)
         {
-            if (mouseManager.objectFollow != null) Destroy(mouseManager.objectFollow);
+            currentBuildingType = -1;
+            if (mouseManager.objectFollow != null)
+                mouseManager.objectFollow.GetComponent<PooledObject>().ReturnObject();
             currentBuilding = null;
             mouseManager.objectFollow = null;
         }
         else
         {
-            Destroy(mouseManager.objectFollow);
+            currentBuildingType = index;
+
+            //Destroy(mouseManager.objectFollow);
+            if (mouseManager.objectFollow != null)
+                mouseManager.objectFollow.GetComponent<PooledObject>().ReturnObject();
+
             currentBuilding = buildingTypes[index];
-            mouseManager.objectFollow = Instantiate(currentBuilding.buildingPrefab);
+            mouseManager.objectFollow = objectPools[index].GetObject();
             mouseManager.objectFollow.tag = "Untagged";
-            if (index == 0) {
-                mouseManager.objectFollow.GetComponent<TowerBehaviour>().enabled = false;
-                mouseManager.objectFollow.GetComponentInChildren<DetectEnemy>().enabled = false;
-                mouseManager.objectFollow.GetComponentInChildren<SphereCollider>().enabled = false;
-                mouseManager.objectFollow.GetComponent<Collider>().enabled = false;
-            }
+
+            DisableTowerFollowScripts();
         }
+    }
+
+    public void DisableTowerFollowScripts()
+    {
+        TowerBehaviour TB = mouseManager.objectFollow.GetComponent<TowerBehaviour>();
+        if (TB != null) TB.enabled = false;
+
+        DetectEnemy DE = mouseManager.objectFollow.GetComponentInChildren<DetectEnemy>();
+        if (DE != null) DE.enabled = false;
+
+        SphereCollider SC = mouseManager.objectFollow.GetComponentInChildren<SphereCollider>();
+        if (SC != null) SC.enabled = false;
+        
+        Collider collider = mouseManager.objectFollow.GetComponent<Collider>();
+        if (collider != null) collider.enabled = false;
     }
 }

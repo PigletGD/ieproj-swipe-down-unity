@@ -10,7 +10,15 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] private List<GameObject> availablePool = new List<GameObject>();
     [SerializeField] private List<GameObject> usedPool = new List<GameObject>();
 
+    [SerializeField] private bool instantiateImmediately = false;
+
     private void Start()
+    {
+        if (instantiateImmediately)
+            InstantiateInitialObjects();
+    }
+
+    public void InstantiateInitialObjects()
     {
         for (int i = 0; i < initialPoolSize; i++)
         {
@@ -18,8 +26,16 @@ public class ObjectPool : MonoBehaviour
                 Vector3.zero, Quaternion.identity, transform);
             GO.AddComponent<PooledObject>().SetPool(this);
             GO.name = "Pooled " + i;
-            ReturnObject(GO);
+
+            GO.SetActive(false);
+            availablePool.Add(GO);
         }
+    }
+
+    public void SetUpPool(GameObject GO, int newPoolSize)
+    {
+        pooledObject = GO;
+        initialPoolSize = newPoolSize;
     }
 
     public GameObject GetObject()

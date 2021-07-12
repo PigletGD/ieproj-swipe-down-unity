@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da649f1567182834aabab8c6b575b61b, type: 3}
-  m_Name: Attack Building
+  m_Name: Bidet Building
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 7800365577940988191, guid: a5047ad74ea6f4940b16f1504f903934,
+  buildingPrefab: {fileID: 7800365577940988191, guid: 69ae8f7c2fd3b844d8117c91abad8275,
     type: 3}
   buildingCost: 15
   buildingIcon: {fileID: 21300000, guid: f39fe41e13e92c54c9fe39060ef30fde, type: 3}
+  initialPoolSize: 30

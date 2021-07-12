@@ -8,4 +8,5 @@ public class BuildingSO : ScriptableObject
     public GameObject buildingPrefab;
     public int buildingCost;
     public Sprite buildingIcon;
+    public int initialPoolSize;
 }

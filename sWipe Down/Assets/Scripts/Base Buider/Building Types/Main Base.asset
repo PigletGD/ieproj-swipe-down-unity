@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da649f1567182834aabab8c6b575b61b, type: 3}
   m_Name: Main Base
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 1475137507578969285, guid: 0b1498624f48bdb41883462feefedf7e,
+  buildingPrefab: {fileID: 1475137507578969285, guid: 52e1d046294ea964093defe23b930355,
     type: 3}
   buildingCost: 0
   buildingIcon: {fileID: 0}

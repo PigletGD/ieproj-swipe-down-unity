@@ -48,12 +48,6 @@ public class HealthComponent : MonoBehaviour
             if (entity.tag != "Base")
             {
                 entity.GetComponent<TowerBehaviour>().RemoveTargetedList();
-
-                MeshRenderer[] mrList = entity.GetComponentsInChildren<MeshRenderer>();
-                foreach (MeshRenderer meshrend in mrList)
-                {
-                    meshrend.enabled = false;
-                }
             }
             else { entity.GetComponent<GoToEndScreen>().SwitchScene(); return; }
             
@@ -65,12 +59,10 @@ public class HealthComponent : MonoBehaviour
             onEnemyKilled.Raise();
         }
 
-        // make mesh invisible
-        //mr.enabled = false;
-
         //gameObject.tag = "Untagged";
 
-        if (!isEnemy && entity.tag != "Base") BuildingManager.instance.RemoveBuildingFromDictionary(gameObject.GetComponent<TowerBehaviour>().key);
+        TowerBehaviour TB = gameObject.GetComponent<TowerBehaviour>();
+        if (TB != null) BuildingManager.instance.RemoveBuildingFromDictionary(TB.key);
 
         PooledObject pooled = gameObject.GetComponent<PooledObject>();
         if (pooled != null) pooled.ReturnObject();

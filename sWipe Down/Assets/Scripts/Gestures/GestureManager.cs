@@ -14,7 +14,6 @@ public class GestureManager : MonoBehaviour
     private Vector2 startPoint = Vector2.zero;
     private Vector2 endPoint = Vector2.zero;
     private float gestureTime = 0;
-    private bool isTouching = false;
 
     private void Awake()
     {
