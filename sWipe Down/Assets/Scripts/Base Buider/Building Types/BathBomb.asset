@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da649f1567182834aabab8c6b575b61b, type: 3}
-  m_Name: Shampoo Building
+  m_Name: BathBomb
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 4590612741696606896, guid: b542c49347a9a9745a93120a55eb07f4,
+  buildingPrefab: {fileID: 1407389530094153348, guid: 0e9c1a7b786fb224ab870dff2fc4da7b,
     type: 3}
-  buildingCost: 15
-  buildingIcon: {fileID: 21300000, guid: 53c326315a7fd864cbe047a069a37260, type: 3}
+  buildingCost: 35
+  buildingIcon: {fileID: 21300000, guid: e5cc913fe7dd4164fa82ca1887fc476d, type: 3}
   initialPoolSize: 30

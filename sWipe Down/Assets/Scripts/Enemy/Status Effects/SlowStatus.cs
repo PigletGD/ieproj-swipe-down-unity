@@ -6,11 +6,11 @@ using UnityEngine;
 // Note:  Stacking Effect
 public class SlowStatus : StatusEffect
 {
-    public SlowStatus(float slowPercent)
+    public SlowStatus(float slowPercent, float dur)
     {
         this.slowPercentValue = slowPercent;
-        duration = 0;
-        durationType = Duration.INSTANTANEOUS;
+        duration = dur;
+        durationType = Duration.LASTING;
     }
 
     private float slowPercentValue;

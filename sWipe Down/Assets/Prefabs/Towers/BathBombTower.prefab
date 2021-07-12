@@ -143,7 +143,7 @@ MonoBehaviour:
   targetedList: []
   fireRate: 2
   key: 
-  bullet: {fileID: 7892922164849568831, guid: 5f634928279d0d645a9ebd1d858a89cb, type: 3}
+  bullet: {fileID: 8539990921253754140, guid: 9bf526e5a0bd8464bb03457252a0d41c, type: 3}
   muzzle: {fileID: 9207744094947900895}
 --- !u!114 &4930443957894426114
 MonoBehaviour:
@@ -160,7 +160,7 @@ MonoBehaviour:
   maxHealth: 5
   isEnemy: 0
   entity: {fileID: 1407389530094153348}
-  mr: {fileID: 4715439383480110131}
+  mr: {fileID: 0}
   healthBar: {fileID: 5247319445843640968}
   onEnemyKilled: {fileID: 0}
 --- !u!1 &2034423613201296483

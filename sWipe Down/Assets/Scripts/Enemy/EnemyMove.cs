@@ -12,7 +12,7 @@ public class EnemyMove : MonoBehaviour
     public Transform target = null;
     public List<Transform> targetList = null;
     public List<Transform> targetedList = null;
-    public List<StatusEffect> statusEffectsList = null;
+    public List<StatusEffect> statusEffectsList = new List<StatusEffect>();
 
     private float timeElapsed = 0f;
     [SerializeField] float attackRate = 0f;
@@ -100,18 +100,19 @@ public class EnemyMove : MonoBehaviour
     {
         speed = maxSpeed;
 
-        foreach (StatusEffect statusEffect in statusEffectsList)
+        for (int i = statusEffectsList.Count -1; i >= 0; i--)
         {
+            StatusEffect statusEffect = statusEffectsList[i];
             statusEffect.ApplyEffect(this.gameObject);
             if (statusEffect.durationType == Duration.INSTANTANEOUS)
             {
-                statusEffectsList.Remove(statusEffect);
+                statusEffectsList.RemoveAt(i);
             }
             else if (statusEffect.durationType == Duration.LASTING)
             {
                 statusEffect.duration -= deltaTime;
                 if(statusEffect.duration <= 0)
-                    statusEffectsList.Remove(statusEffect);
+                    statusEffectsList.RemoveAt(i);
             }
         }
     }
