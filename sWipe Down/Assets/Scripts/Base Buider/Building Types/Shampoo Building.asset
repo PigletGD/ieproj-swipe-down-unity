@@ -15,5 +15,5 @@ MonoBehaviour:
   buildingPrefab: {fileID: 4590612741696606896, guid: b542c49347a9a9745a93120a55eb07f4,
     type: 3}
   buildingCost: 15
-  buildingIcon: {fileID: 21300000, guid: 53c326315a7fd864cbe047a069a37260, type: 3}
+  buildingIcon: {fileID: 21300000, guid: d3687d2173de86945b4e975c734a46b9, type: 3}
   initialPoolSize: 30
