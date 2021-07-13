@@ -8,17 +8,25 @@ public class DrainTileBehaviour : TowerBehaviour
     // Start is called before the first frame update
     public override void ExecuteAction()
     {
-        if (activated == false)
+        if (!activated)
         {
             target.GetComponent<EnemyMove>().AddStatusEffect(new RestrainStatus(3));
-            Destroy(this.gameObject);
+            activated = true;
         }
-        
+
+        StartCoroutine("DestroyDrain");
     }
 
     public override bool ReadyToExecuteAction()
     {
         if (target != null) return true;
         return false;
+    }
+
+    IEnumerator DestroyDrain()
+    {
+        yield return new WaitForSeconds(3);
+
+        Destroy(gameObject);
     }
 }

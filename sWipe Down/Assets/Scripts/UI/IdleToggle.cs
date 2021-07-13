@@ -9,7 +9,6 @@ public class IdleToggle : MonoBehaviour, IPointerDownHandler
     [SerializeField] Vector2 toggleOffPosition = Vector3.zero;
 
     [SerializeField] RectTransform parent = null;
-    [SerializeField] RectTransform rectTransform = null;
 
     public bool toggleOn = true;
 

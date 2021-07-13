@@ -56,11 +56,21 @@ public class BuildingManager : MonoBehaviour
             OP.SetUpPool(buildingTypes[i].buildingPrefab, buildingTypes[i].initialPoolSize);
             OP.InstantiateInitialObjects();
             objectPools.Add(OP);
+
+            List<GameObject> list = OP.GetAVailableObjectList();
+
+            foreach (GameObject gameObject in list)
+            {
+                TowerBehaviour TB = gameObject.GetComponent<TowerBehaviour>();
+                if (TB != null) TB.SetTowerValue(buildingTypes[i].buildingCost);
+            }
         }
     }
 
     public void InstantiateBuilding(Vector3 position)
     {
+        if (currentBuilding == null) return;
+
         int x = (int)(position.x - 0.5f);
         int y = (int)(position.z - 0.5f);
 
@@ -102,13 +112,12 @@ public class BuildingManager : MonoBehaviour
 
     public void RemoveBuildingFromDictionary(string key)
     {
-        Debug.Log("Removing " + key);
         buildingDictionary.Remove(key);
     }
 
     public void ChangeCurrentlySelectedBuilding(int index)
     {
-        if (index < 0 || index >= buildingTypes.Count)
+        if (index < 0 || index >= buildingTypes.Count || index == currentBuildingType)
         {
             currentBuildingType = -1;
             if (mouseManager.objectFollow != null)
@@ -120,7 +129,6 @@ public class BuildingManager : MonoBehaviour
         {
             currentBuildingType = index;
 
-            //Destroy(mouseManager.objectFollow);
             if (mouseManager.objectFollow != null)
                 mouseManager.objectFollow.GetComponent<PooledObject>().ReturnObject();
 

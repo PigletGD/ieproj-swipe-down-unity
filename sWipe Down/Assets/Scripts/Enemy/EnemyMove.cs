@@ -50,13 +50,12 @@ public class EnemyMove : MonoBehaviour
     {
         timeElapsed += Time.deltaTime;
 
-        ApplyStatusEffects(timeElapsed);
+        ApplyStatusEffects(Time.deltaTime);
 
         if (target != null)
         {
             owner.LookAt(new Vector3(target.position.x, 0.0f, target.position.z));
 
-            //Vector3 direction = new Vector3(target.position.x, 0.0f, target.position.z) - new Vector3(owner.position.x, 0.0f, owner.position.z);
             rb.MovePosition(owner.position + (owner.forward * speed * Time.deltaTime));
             
         }
@@ -99,7 +98,6 @@ public class EnemyMove : MonoBehaviour
     private void ApplyStatusEffects(float deltaTime)
     {
         speed = maxSpeed;
-
         for (int i = statusEffectsList.Count -1; i >= 0; i--)
         {
             StatusEffect statusEffect = statusEffectsList[i];
@@ -111,8 +109,10 @@ public class EnemyMove : MonoBehaviour
             else if (statusEffect.durationType == Duration.LASTING)
             {
                 statusEffect.duration -= deltaTime;
-                if(statusEffect.duration <= 0)
+                if (statusEffect.duration <= 0)
+                {
                     statusEffectsList.RemoveAt(i);
+                }
             }
         }
     }

@@ -18,8 +18,6 @@ public class MouseManager : MonoBehaviour
 
     public EventVector3 OnClickEnvironment;
 
-    private bool _useDefaultCursor = false;
-
     // Building Placing Stuff [remove later]
     public GameObject player = null;
     public GameObject currentlySelected = null;
@@ -27,7 +25,6 @@ public class MouseManager : MonoBehaviour
 
     // Test prefab for building
     public GameObject objectFollow = null;
-    [SerializeField] GameObject testBuilding = null;
     [SerializeField] float tileSize = 0;
 
     // Camera Transformation
@@ -104,7 +101,7 @@ public class MouseManager : MonoBehaviour
                     objectFollow.transform.position = cursorPos;
 
                     // Input
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButton(0))
                     {
                         // Do world stuff here
                         if (!IsPointerOverUIObject())

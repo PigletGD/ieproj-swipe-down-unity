@@ -7,7 +7,7 @@ public class ResultsScreen : MonoBehaviour
 {
     public void RetryGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("GameScene");
     }
 
     public void QuitGame()

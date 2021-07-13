@@ -5,21 +5,26 @@ using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] ObjectPool basicEnemyPool = default;
-    [SerializeField] int initialSpawnCount = 0;
+    [SerializeField] List<ObjectPool> enemyPools = default;
+    [SerializeField] int spawnCount = 0;
     [SerializeField] float spawnRadius = 0f;
     [SerializeField] int initialMinTimer = 0;
     [SerializeField] int initialMaxTimer = 0;
     private float radius = 0;
     private int minTimer = 0;
     private int maxTimer = 0;
-    private int spawnCount = 0;
     private int remainingEnemies = 0;
     private int timerInteger = 0;
     private float timerForNextSpawn = 0f;
     private bool waveOngoing = false;
 
+    private bool startEnemyWaveSpawning = false;
+
     [SerializeField] Text waveMessage = null;
+
+    [SerializeField] List<WaveSO> waves = default;
+
+    List<int> enemyType = new List<int>();
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +34,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        if (!waveOngoing)
+        if (!waveOngoing && startEnemyWaveSpawning)
         {
             timerForNextSpawn -= Time.deltaTime;
 
@@ -52,8 +57,7 @@ public class EnemyManager : MonoBehaviour
         GameObject GO;
         for (int i = 0; i < spawnCount; i++)
         {
-            GO = basicEnemyPool.GetObject();
-            if (GO == null) Debug.Log("Cringe");
+            GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
             GO.transform.position = RandomCircle();
         }
 
@@ -71,14 +75,7 @@ public class EnemyManager : MonoBehaviour
         {
             waveOngoing = false;
 
-            if (minTimer > 10) minTimer -= 3;
-            if (maxTimer > 10) maxTimer -= 3;
-
             timerForNextSpawn = Random.Range(minTimer, maxTimer);
-
-            if (spawnCount < 30) spawnCount += 2;
-
-            if (radius < 25) radius++;
 
             UpdateTimerText();
         }
@@ -87,7 +84,11 @@ public class EnemyManager : MonoBehaviour
 
     void ResetValues()
     {
-        spawnCount = initialSpawnCount;
+        startEnemyWaveSpawning = false;
+
+        waveMessage.text = "";
+
+        //spawnCount = initialSpawnCount;
         minTimer = initialMinTimer;
         maxTimer = initialMaxTimer;
 
@@ -96,7 +97,7 @@ public class EnemyManager : MonoBehaviour
 
         radius = spawnRadius;
 
-        UpdateTimerText();
+        //UpdateTimerText();
     }
 
     Vector3 RandomCircle()
@@ -109,5 +110,30 @@ public class EnemyManager : MonoBehaviour
         pos.z = spawnRadius * Mathf.Cos(angle * Mathf.Deg2Rad);
 
         return pos;
+    }
+
+    public void AdvanceToNextWave()
+    {
+        if (waves.Count <= 0) return;
+
+        spawnCount = waves[0].spawnNumber;
+
+        minTimer = waves[0].initialMinTimer;
+        maxTimer = waves[0].initialMaxTimer;
+
+        for (int i = 0; i < waves[0].enemyTypes.Length; i++)
+            enemyType.Add(waves[0].enemyTypes[i]);
+
+        waves.RemoveAt(0);
+
+        if (!startEnemyWaveSpawning)
+        {
+            timerForNextSpawn = Random.Range(minTimer, maxTimer);
+            timerInteger = (int)timerForNextSpawn - 1;
+
+            startEnemyWaveSpawning = true;
+        }
+
+        UpdateTimerText();
     }
 }

@@ -10,7 +10,6 @@ public class BuildingToggle : MonoBehaviour, IPointerDownHandler
     [SerializeField] float arbitraryNumber;
 
     [SerializeField] RectTransform parent = null;
-    [SerializeField] RectTransform rectTransform = null;
 
     [SerializeField] LayoutElement LE = null;
 

@@ -10,8 +10,6 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] bool isEnemy = false;
     [SerializeField] GameObject entity = null;
 
-    [SerializeField] MeshRenderer mr = null;
-
     private bool deadAlready = false;
 
     [SerializeField] HealthBar healthBar = null;
@@ -62,7 +60,12 @@ public class HealthComponent : MonoBehaviour
         //gameObject.tag = "Untagged";
 
         TowerBehaviour TB = gameObject.GetComponent<TowerBehaviour>();
-        if (TB != null) BuildingManager.instance.RemoveBuildingFromDictionary(TB.key);
+        if (TB != null)
+        {
+            TB.ReduceTotalValue();
+            BuildingManager.instance.RemoveBuildingFromDictionary(TB.key);
+        } 
+            
 
         PooledObject pooled = gameObject.GetComponent<PooledObject>();
         if (pooled != null) pooled.ReturnObject();

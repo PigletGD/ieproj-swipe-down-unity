@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 2872097289944362114}
   - component: {fileID: 8027789216148586758}
   - component: {fileID: -3712869389303099054}
+  - component: {fileID: 2530367642391258138}
   m_Layer: 0
   m_Name: TpGeneratorPlaceholder
   m_TagString: Untagged
@@ -303,7 +304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3211187378551961144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 515.2248, y: 139.1994, z: -547.61334}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3649317720794547228}
@@ -330,7 +331,8 @@ MonoBehaviour:
   targetedList: []
   fireRate: 1
   key: 
-  manager: {fileID: 0}
+  towerValue: 0
+  basegain: 1
 --- !u!114 &-3712869389303099054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,9 +348,21 @@ MonoBehaviour:
   maxHealth: 5
   isEnemy: 0
   entity: {fileID: 3211187378551961144}
-  mr: {fileID: 0}
   healthBar: {fileID: 2477820488392286553}
   onEnemyKilled: {fileID: 0}
+--- !u!65 &2530367642391258138
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3211187378551961144}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &4307996652269335923
 GameObject:
   m_ObjectHideFlags: 0

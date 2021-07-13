@@ -16,4 +16,4 @@ MonoBehaviour:
     type: 3}
   buildingCost: 15
   buildingIcon: {fileID: 21300000, guid: d3687d2173de86945b4e975c734a46b9, type: 3}
-  initialPoolSize: 30
+  initialPoolSize: 20

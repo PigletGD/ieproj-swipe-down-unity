@@ -13,10 +13,16 @@ public abstract class TowerBehaviour : MonoBehaviour
 
     public string key = "";
 
+    protected GameManager manager = default;
+
+    [SerializeField] private int towerValue = default;
+
     void Start()
     {
         targetList = new List<Transform>();
         targetedList = new List<Transform>();
+
+        manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
     }
 
     void Update() => ReadyAction();
@@ -59,5 +65,15 @@ public abstract class TowerBehaviour : MonoBehaviour
                 if (em != null) em.RemoveTarget(transform);
             }
         }
+    }
+
+    public void ReduceTotalValue()
+    {
+        manager.DecrementScore(towerValue);
+    }
+
+    public void SetTowerValue(int value)
+    {
+        towerValue = value;
     }
 }

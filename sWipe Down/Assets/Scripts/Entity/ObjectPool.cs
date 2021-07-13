@@ -58,4 +58,9 @@ public class ObjectPool : MonoBehaviour
         usedPool.Remove(GO);
         availablePool.Add(GO);
     }
+
+    public List<GameObject> GetAVailableObjectList()
+    {
+        return availablePool;
+    }
 }

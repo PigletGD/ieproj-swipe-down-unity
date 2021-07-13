@@ -237,8 +237,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3460618127491944535}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 17, z: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 0.9, y: 15, z: 0.9}
   m_Children: []
   m_Father: {fileID: 4590612741696606900}
   m_RootOrder: 0
@@ -271,7 +271,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: eb2826b04834766429624caf66e0a6ad, type: 2}
-  - {fileID: 2100000, guid: 267470415a925e445a6861cd68f91773, type: 2}
+  - {fileID: 2100000, guid: c2d5333b7ec750741848472482b5dc6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -361,6 +361,7 @@ MonoBehaviour:
   targetedList: []
   fireRate: 0.25
   key: 
+  towerValue: 0
   bullet: {fileID: 1189224412852221907, guid: 61d55826538950944b0d403de345b935, type: 3}
   muzzle: {fileID: 6049837183676252651}
 --- !u!114 &7516886067873337910
@@ -378,7 +379,6 @@ MonoBehaviour:
   maxHealth: 5
   isEnemy: 0
   entity: {fileID: 4590612741696606896}
-  mr: {fileID: 0}
   healthBar: {fileID: 7273055671366090428}
   onEnemyKilled: {fileID: 0}
 --- !u!1 &5541960777576174865
@@ -418,7 +418,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.6}
+  m_AnchoredPosition: {x: 0, y: 1.72}
   m_SizeDelta: {x: 370.17, y: 69.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2438459901623178066

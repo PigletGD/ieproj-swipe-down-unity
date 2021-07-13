@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 
 public class PaperBehaviour : MonoBehaviour
 {
@@ -12,8 +11,6 @@ public class PaperBehaviour : MonoBehaviour
     public RectTransform rt = null;
 
     public RectTransform neighbor;
-
-    private int awakeFrames = 0;
 
     private bool isInstantiated = false;
     private bool isTorn = false;

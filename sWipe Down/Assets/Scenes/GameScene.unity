@@ -1951,6 +1951,7 @@ GameObject:
   - component: {fileID: 552409644}
   - component: {fileID: 552409643}
   - component: {fileID: 552409645}
+  - component: {fileID: 552409646}
   m_Layer: 0
   m_Name: Enemy Manager
   m_TagString: Untagged
@@ -1970,12 +1971,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ace8c0de82a3f4cb2c12926d3c5ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicEnemyPool: {fileID: 1013958254}
-  initialSpawnCount: 10
+  enemyPools:
+  - {fileID: 1013958254}
+  spawnCount: 0
   spawnRadius: 20
   initialMinTimer: 30
   initialMaxTimer: 42
   waveMessage: {fileID: 626612557}
+  waves:
+  - {fileID: 11400000, guid: ede472bda64605b489112ed27b370664, type: 2}
+  - {fileID: 11400000, guid: 27a5c2854815c86478f4e75642da67c0, type: 2}
 --- !u!4 &552409644
 Transform:
   m_ObjectHideFlags: 0
@@ -2009,6 +2014,34 @@ MonoBehaviour:
       - m_Target: {fileID: 552409643}
         m_TargetAssemblyTypeName: 
         m_MethodName: KilledEnemy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &552409646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552409642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c3bc228bfc637747bc49a8a5d6570a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ef5485a1a36054e49984645480ee1a23, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 552409643}
+        m_TargetAssemblyTypeName: EnemyManager, Assembly-CSharp
+        m_MethodName: AdvanceToNextWave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2367,6 +2400,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyText: {fileID: 1337066788}
   onUpdateMoney: {fileID: 11400000, guid: 3f29044682c05f14eb6a6ffa9959b5c4, type: 2}
+  milestones:
+  - {fileID: 11400000, guid: 3f6b54e853284404bbeb2e76f00a88d2, type: 2}
+  - {fileID: 11400000, guid: e43123a68ce470c4a880c5ea88828717, type: 2}
 --- !u!1 &683368282
 GameObject:
   m_ObjectHideFlags: 0
@@ -2672,7 +2708,6 @@ MonoBehaviour:
   toggleOnPosition: {x: 0, y: 0}
   toggleOffPosition: {x: -450, y: 0}
   parent: {fileID: 5330892}
-  rectTransform: {fileID: 1337066785}
   toggleOn: 1
 --- !u!114 &854551663
 MonoBehaviour:
@@ -2845,7 +2880,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2869,7 +2904,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -59.5, y: 47.5, z: -59.5}
+  m_LocalPosition: {x: -61, y: 47.5, z: -57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1645623426}
@@ -4621,8 +4656,6 @@ MonoBehaviour:
   currentlySelected: {fileID: 0}
   currentlyPlacing: {fileID: 0}
   objectFollow: {fileID: 0}
-  testBuilding: {fileID: 2226489731402170279, guid: a24902dadbc7ef1468fea9da015b967a,
-    type: 3}
   tileSize: 1
   cameraRig: {fileID: 1645623426}
   cameraTransform: {fileID: 963194228}
@@ -5021,7 +5054,7 @@ GameObject:
   - component: {fileID: 1700027840}
   - component: {fileID: 1700027839}
   m_Layer: 8
-  m_Name: Plane
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
