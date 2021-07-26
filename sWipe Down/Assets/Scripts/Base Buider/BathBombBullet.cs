@@ -36,7 +36,7 @@ public class BathBombBullet : MonoBehaviour
         {
             if (collider.gameObject.GetComponent<EnemyMove>() != null)
             {
-                collider.gameObject.GetComponent<HealthComponent>().TakeDamage(1);
+                collider.gameObject.GetComponent<HealthComponent>().TakeDamage(5);
                 Rigidbody rb = collider.GetComponent<Rigidbody>();
                 if(rb != null)
                     rb.AddExplosionForce(power, explosionPosition, radius, upforce, ForceMode.Impulse);
