@@ -116,4 +116,9 @@ public class EnemyMove : MonoBehaviour
             }
         }
     }
+
+    public void SetAttackRate(float rate)
+    {
+        attackRate = rate;
+    }
 }

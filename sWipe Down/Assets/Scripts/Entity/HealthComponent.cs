@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
@@ -77,4 +78,7 @@ public class HealthComponent : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+    public int MaxHealth => maxHealth;
+    public int CurrentHealth => currentHealth;
 }

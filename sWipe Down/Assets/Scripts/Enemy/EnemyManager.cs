@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] ObjectPool basicEnemyPool = default;
+    [SerializeField] private List<ObjectPool> enemyPools;
     [SerializeField] int initialSpawnCount = 0;
     [SerializeField] float spawnRadius = 0f;
     [SerializeField] int initialMinTimer = 0;
@@ -52,7 +53,11 @@ public class EnemyManager : MonoBehaviour
         GameObject GO;
         for (int i = 0; i < spawnCount; i++)
         {
-            GO = basicEnemyPool.GetObject();
+            int index = Random.Range(0, enemyPools.Count);
+            GO = enemyPools[index].GetObject();
+            //GO = basicEnemyPool.GetObject();
+
+
             if (GO == null) Debug.Log("Cringe");
             GO.transform.position = RandomCircle();
         }
