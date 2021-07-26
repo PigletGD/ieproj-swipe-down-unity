@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
     [SerializeField] int maxHealth = 0;
     private int currentHealth = 0;
-
+    [SerializeField]private int armor = 0;
     [SerializeField] bool isEnemy = false;
     [SerializeField] GameObject entity = null;
 
@@ -26,7 +27,7 @@ public class HealthComponent : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        currentHealth -= (damage-armor);
         healthBar.SetHealth(currentHealth);
 
         if (currentHealth <= 0 && !deadAlready)
@@ -80,4 +81,7 @@ public class HealthComponent : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+    public int MaxHealth => maxHealth;
+    public int CurrentHealth => currentHealth;
 }

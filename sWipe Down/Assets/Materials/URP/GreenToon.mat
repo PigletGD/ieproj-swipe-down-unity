@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-461294199495147408
+--- !u!114 &-603629223531363348
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Red Toon
+  m_Name: GreenToon
   m_Shader: {fileID: -6465566751694194690, guid: 27ee05c00727d7546a5972f25c2846be,
     type: 3}
   m_ShaderKeywords: 
@@ -129,10 +129,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_0f6b4091ff434ad28cd084dc0f47bd55: {r: 0.9433962, g: 0.40155244, b: 0.38625845,
+    - Color_0f6b4091ff434ad28cd084dc0f47bd55: {r: 0.036648154, g: 0.9716981, b: 0.03208439,
         a: 0}
     - Vector2_020fb3c5f087468283eb1eba7eafdadc: {r: 0, g: 0, b: 0, a: 0}
-    - Vector2_1e6a879340b743e6a01cc1f639e2fcd8: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_1e6a879340b743e6a01cc1f639e2fcd8: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

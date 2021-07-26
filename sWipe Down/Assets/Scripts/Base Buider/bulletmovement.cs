@@ -12,7 +12,7 @@ public class bulletmovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<HealthComponent>().TakeDamage(1);
+            collision.gameObject.GetComponent<HealthComponent>().TakeDamage(2);
             Destroy(gameObject);
         }
     }
