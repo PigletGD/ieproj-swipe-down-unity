@@ -28,7 +28,7 @@ public class HealthComponent : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        currentHealth -= (damage-armor);
         healthBar.SetHealth(currentHealth);
 
         if (currentHealth <= 0 && !deadAlready)
