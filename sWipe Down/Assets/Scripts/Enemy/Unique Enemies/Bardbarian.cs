@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Bardbarian : MonoBehaviour
 {
-    public int maxHP { get; private set; }
-    public int curtainHP { get; private set; }
+    [SerializeField] public int curtainHP { get; private set; } = 10;
 
     private HealthComponent healthComponent;
     private bool rage = false;
@@ -21,8 +21,17 @@ public class Bardbarian : MonoBehaviour
 
     private void Update()
     {
-        if (!rage)
+        if (!rage && healthComponent.CurrentHealth < healthComponent.MaxHealth - curtainHP)
         {
+            Rage();
         }
+    }
+
+    private void Rage()
+    {
+        Debug.Log("Rage");
+        gameObject.GetComponentInChildren<EnemyMove>().maxSpeed = rageMoveSpeed;
+        gameObject.GetComponentInChildren<EnemyMove>().SetAttackRate(rageAttackSpeed);
+        rage = true;
     }
 }

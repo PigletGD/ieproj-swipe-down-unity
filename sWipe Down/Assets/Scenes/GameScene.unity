@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465754, g: 0.4964128, b: 0.574816, a: 1}
+  m_IndirectSpecularColor: {r: 0.446576, g: 0.49641335, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -400,6 +400,55 @@ MonoBehaviour:
   - {fileID: 1960470658}
   buttonsHolder: {fileID: 449182765}
   lastActiveTab: {fileID: 523523285}
+--- !u!1 &120852658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 120852659}
+  - component: {fileID: 120852660}
+  m_Layer: 0
+  m_Name: Bardbarian Enemy Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &120852659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120852658}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 434735401}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &120852660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120852658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5ae980c8eb5ef40a57461ac0a3f0a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObject: {fileID: 626347508121012308, guid: 8ef38b4dc4adb8141a4cf69e37e8220c,
+    type: 3}
+  initialPoolSize: 20
+  availablePool: []
+  usedPool: []
+  instantiateImmediately: 0
 --- !u!1 &174603411
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +1026,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 264816112}
   m_CullTransparentMesh: 1
+--- !u!1 &296265229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 296265230}
+  - component: {fileID: 296265231}
+  m_Layer: 0
+  m_Name: Tank Enemy Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &296265230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296265229}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 434735401}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &296265231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296265229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5ae980c8eb5ef40a57461ac0a3f0a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObject: {fileID: 3641186141409717720, guid: 10172b39d47d2a54d902ea709af330b9,
+    type: 3}
+  initialPoolSize: 20
+  availablePool: []
+  usedPool: []
+  instantiateImmediately: 0
 --- !u!1 &301577579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,6 +1611,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1013958253}
+  - {fileID: 583097822}
+  - {fileID: 296265230}
+  - {fileID: 120852659}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1971,10 +2072,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicEnemyPool: {fileID: 1013958254}
+  enemyPools:
+  - {fileID: 1013958254}
+  - {fileID: 583097823}
+  - {fileID: 296265231}
+  - {fileID: 120852660}
   initialSpawnCount: 10
   spawnRadius: 20
   initialMinTimer: 30
-  initialMaxTimer: 42
+  initialMaxTimer: 45
   waveMessage: {fileID: 626612557}
 --- !u!4 &552409644
 Transform:
@@ -2126,6 +2232,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf6fcf608670ab4babfd0ac584b33ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &583097821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 583097822}
+  - component: {fileID: 583097823}
+  m_Layer: 0
+  m_Name: Speed Enemy Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &583097822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583097821}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 434735401}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &583097823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583097821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5ae980c8eb5ef40a57461ac0a3f0a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObject: {fileID: 1547367375334134029, guid: 3d58b01d1b405ee4e919a8c4ac5b9b18,
+    type: 3}
+  initialPoolSize: 20
+  availablePool: []
+  usedPool: []
+  instantiateImmediately: 0
 --- !u!1 &626612556
 GameObject:
   m_ObjectHideFlags: 0
@@ -2525,7 +2680,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 2.3509887e-38, z: -2.3059837e+18, w: 5.820766e-11}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -2918,7 +3073,7 @@ GameObject:
   - component: {fileID: 1013958253}
   - component: {fileID: 1013958254}
   m_Layer: 0
-  m_Name: Basic Enemy Pool
+  m_Name: ScatWeapon Enemy Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2950,7 +3105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb5ae980c8eb5ef40a57461ac0a3f0a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledObject: {fileID: 6300176592904248719, guid: 2d48ad6c518b94a40b484caee5fe0959,
+  pooledObject: {fileID: 3792218784969156596, guid: 545839c569c91324ea109d27cebd707f,
     type: 3}
   initialPoolSize: 20
   availablePool: []
