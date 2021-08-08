@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PaperBehaviour : MonoBehaviour
 {
@@ -18,12 +19,33 @@ public class PaperBehaviour : MonoBehaviour
 
     private Vector3 lastDownPosition = Vector3.zero;
 
+    [SerializeField] Sprite regular = default;
+    [SerializeField] Sprite gold = default;
+
+    private int value = 1;
+
     private void Awake()
     {
         rt = GetComponent<RectTransform>();
         TS = FindObjectOfType<TestScroll>();
         paperManager = FindObjectOfType<PaperManager>();
         gameManager = FindObjectOfType<GameManager>();
+    }
+
+    private void OnEnable()
+    {
+        Image image = GetComponent<Image>();
+
+        if (Random.Range(1, 101) <= TS.goldPaperChance)
+        {
+            image.sprite = gold;
+            value = 10;
+        }
+        else
+        {
+            image.sprite = regular;
+            value = 1;
+        }
     }
 
     // Update is called once per frame
@@ -58,7 +80,7 @@ public class PaperBehaviour : MonoBehaviour
             Vector2 moveVector = new Vector2(0, -100 + (300 * TS.ScrollSpeed));
             if (TS.holdingTP) moveVector *= 0.5f;
             rb.velocity = moveVector;
-            gameManager.IncrementScore(1);
+            gameManager.IncrementScore(value);
             // Debug.Log(gameObject.name + rb.velocity.y);
         }
         if (rt.localPosition.y < (Screen.height * 0.5) + 50 && !isInstantiated)

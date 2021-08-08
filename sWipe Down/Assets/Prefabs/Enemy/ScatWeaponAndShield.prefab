@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -351022541804052484, guid: 5fb0bf72454b45a488567190156d7f16, type: 3}
+  - {fileID: 6271573414225017425, guid: cef295af1a858cb44bc93d504f2fc8b4, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -602,7 +602,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.425, z: 0}
 --- !u!54 &3792218784969156601
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -656,9 +656,8 @@ MonoBehaviour:
   armor: 0
   isEnemy: 1
   entity: {fileID: 3792218784969156596}
-  mr: {fileID: 3792218784969156603}
   healthBar: {fileID: 7600158426608276573}
-  onEnemyKilled: {fileID: 11400000, guid: 32de10aa041706149aaecaf7f39698cf, type: 2}
+  onEnemyKilled: {fileID: 11400000, guid: f364a08e3e98f5744a6655f53f32c5b0, type: 2}
 --- !u!1 &3792218785180675629
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,7 +812,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -351022541804052484, guid: 5fb0bf72454b45a488567190156d7f16, type: 3}
+  - {fileID: 6271573414225017425, guid: cef295af1a858cb44bc93d504f2fc8b4, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -891,7 +890,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5602992111257654833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.425, z: 0}
   m_LocalScale: {x: 12, y: 6, z: 12}
   m_Children:
   - {fileID: 4434981821809408708}

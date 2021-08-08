@@ -270,7 +270,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eb2826b04834766429624caf66e0a6ad, type: 2}
+  - {fileID: 2100000, guid: 4cdc28578e9f7d64d826146ccd066ef6, type: 2}
   - {fileID: 2100000, guid: 267470415a925e445a6861cd68f91773, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -361,6 +361,7 @@ MonoBehaviour:
   targetedList: []
   fireRate: 0.25
   key: 
+  towerValue: 0
   bullet: {fileID: 1189224412852221907, guid: 61d55826538950944b0d403de345b935, type: 3}
   muzzle: {fileID: 6049837183676252651}
 --- !u!114 &7516886067873337910
@@ -379,7 +380,6 @@ MonoBehaviour:
   armor: 0
   isEnemy: 0
   entity: {fileID: 4590612741696606896}
-  mr: {fileID: 0}
   healthBar: {fileID: 7273055671366090428}
   onEnemyKilled: {fileID: 0}
 --- !u!1 &5541960777576174865

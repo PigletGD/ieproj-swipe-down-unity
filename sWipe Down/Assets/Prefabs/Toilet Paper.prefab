@@ -131,3 +131,5 @@ MonoBehaviour:
   rt: {fileID: 0}
   neighbor: {fileID: 0}
   isInitial: 0
+  regular: {fileID: 21300000, guid: ae579372aeba0cc4ba9f7ef8e6f8c9ca, type: 3}
+  gold: {fileID: 21300000, guid: 383ff4382baf60941bc88d6faa652b7e, type: 3}

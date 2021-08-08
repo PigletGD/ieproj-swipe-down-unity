@@ -25,15 +25,13 @@ public class TitleScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         ScrollSpeed = 0;
 
         startingPos = rectTransform.position;
-        endingPos = startingPos + new Vector3(0f, -1000f, 0f);
+        endingPos = startingPos + new Vector3(0f, -1500f, 0f);
     }
 
     private void Update()
     {
-        Debug.Log("On Update");
         if (isDragging)
         {
-            Debug.Log("Dragging");
             initialClickPos = currentClickPos;
             currentClickPos = Input.mousePosition;
         }
@@ -44,8 +42,6 @@ public class TitleScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("True?");
-
         isDragging = true;
 
         initialClickPos = Input.mousePosition;
@@ -89,7 +85,7 @@ public class TitleScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         if(rectTransform.position.y < endingPos.y)
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("GameScene");
         }
     }
 }

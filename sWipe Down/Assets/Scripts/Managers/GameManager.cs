@@ -8,9 +8,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] MoneyText moneyText;
 
-    [SerializeField] GameEventsSO onUpdateMoney = null;
+    [SerializeField] VoidEvent onUpdateMoney = null;
 
     [SerializeField] List<MilestoneSO> milestones = default;
+    [SerializeField] List<MilestoneSO> tpMilestones = default;
 
     private float tick = 0;
 
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
         if (tick > 0.25f)
         {
             CheckForReachedMilestones();
+            CheckForReachedTPMilestones();
 
             tick = 0.0f;
         }
@@ -69,5 +71,23 @@ public class GameManager : MonoBehaviour
             }
             else reached = false;
         } while (reached && milestones.Count > 0);
+    }
+
+    public void CheckForReachedTPMilestones()
+    {
+        if (tpMilestones.Count <= 0) return;
+
+        bool reached;
+
+        do
+        {
+            if (Currency >= tpMilestones[0].valueThreshold)
+            {
+                tpMilestones[0].milestoneType.Raise();
+                tpMilestones.RemoveAt(0);
+                reached = true;
+            }
+            else reached = false;
+        } while (reached && tpMilestones.Count > 0);
     }
 }

@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: JA_Midterms_121720_BidetTower_colormap
-    second: {fileID: 2800000, guid: 20be216e801a2d64983b438dfeccfa86, type: 3}
+    second: {fileID: 2800000, guid: dfdeb87e6a57e244ea2272bd0d3caab9, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

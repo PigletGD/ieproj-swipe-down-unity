@@ -26,6 +26,8 @@ public class BuildingButton : MonoBehaviour
 
     public void CheckButtonValidity()
     {
+        if (gameManager == null) gameManager = FindObjectOfType<GameManager>();
+
         if (gameManager.Currency < building.buildingCost) button.interactable = false;
         else button.interactable = true;
     }

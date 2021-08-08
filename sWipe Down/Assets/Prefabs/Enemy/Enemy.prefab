@@ -350,9 +350,8 @@ MonoBehaviour:
   armor: 0
   isEnemy: 1
   entity: {fileID: 6300176592904248719}
-  mr: {fileID: 6300176592904248704}
   healthBar: {fileID: 772151889801391654}
-  onEnemyKilled: {fileID: 11400000, guid: 32de10aa041706149aaecaf7f39698cf, type: 2}
+  onEnemyKilled: {fileID: 11400000, guid: f364a08e3e98f5744a6655f53f32c5b0, type: 2}
 --- !u!1 &6300176593800025174
 GameObject:
   m_ObjectHideFlags: 0

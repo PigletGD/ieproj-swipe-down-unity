@@ -159,7 +159,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.425, z: 0}
 --- !u!54 &1547367375334134016
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -209,13 +209,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3c2a77a491f2446ab4c26121487d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 5
   armor: 0
   isEnemy: 1
   entity: {fileID: 1547367375334134029}
-  mr: {fileID: 1547367375334134018}
   healthBar: {fileID: 5233428349843022500}
-  onEnemyKilled: {fileID: 11400000, guid: 32de10aa041706149aaecaf7f39698cf, type: 2}
+  onEnemyKilled: {fileID: 11400000, guid: f364a08e3e98f5744a6655f53f32c5b0, type: 2}
 --- !u!1 &2680180641781990579
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.09}
+  m_AnchoredPosition: {x: 0, y: 1.3}
   m_SizeDelta: {x: 370.17, y: 69.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6016579177188007290
@@ -717,7 +716,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7789014222148706504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.425, z: 0}
   m_LocalScale: {x: 12, y: 6, z: 12}
   m_Children: []
   m_Father: {fileID: 1547367375334134020}

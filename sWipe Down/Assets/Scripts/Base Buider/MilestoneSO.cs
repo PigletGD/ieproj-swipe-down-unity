@@ -6,5 +6,5 @@ using UnityEngine;
 public class MilestoneSO : ScriptableObject
 {
     public int valueThreshold;
-    public GameEventsSO milestoneType;
+    public VoidEvent milestoneType;
 }

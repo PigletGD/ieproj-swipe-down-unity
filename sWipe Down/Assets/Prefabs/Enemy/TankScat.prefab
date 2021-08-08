@@ -520,7 +520,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.425, z: 0}
 --- !u!54 &3641186141409717717
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -549,8 +549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a5990e2c5037949be0bce3d77b4061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  maxSpeed: 1
+  speed: 0.75
+  maxSpeed: 0.75
   owner: {fileID: 3641186141409717713}
   rb: {fileID: 3641186141409717717}
   baseBuilding: {fileID: 0}
@@ -574,9 +574,8 @@ MonoBehaviour:
   armor: 1
   isEnemy: 1
   entity: {fileID: 3641186141409717720}
-  mr: {fileID: 3641186141409717719}
   healthBar: {fileID: 8021353722607492721}
-  onEnemyKilled: {fileID: 11400000, guid: 32de10aa041706149aaecaf7f39698cf, type: 2}
+  onEnemyKilled: {fileID: 11400000, guid: f364a08e3e98f5744a6655f53f32c5b0, type: 2}
 --- !u!1 &5470025026713377821
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +602,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5470025026713377821}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.425, z: 0}
   m_LocalScale: {x: 18, y: 9, z: 18}
   m_Children: []
   m_Father: {fileID: 3641186141409717713}
@@ -696,7 +695,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.09}
+  m_AnchoredPosition: {x: 0, y: 1.55}
   m_SizeDelta: {x: 370.17, y: 69.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8398759272968708527

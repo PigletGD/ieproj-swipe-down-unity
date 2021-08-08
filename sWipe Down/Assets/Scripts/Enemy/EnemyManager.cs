@@ -121,6 +121,8 @@ public class EnemyManager : MonoBehaviour
         minTimer = waves[0].initialMinTimer;
         maxTimer = waves[0].initialMaxTimer;
 
+        enemyType.Clear();
+
         for (int i = 0; i < waves[0].enemyTypes.Length; i++)
             enemyType.Add(waves[0].enemyTypes[i]);
 

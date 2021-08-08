@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Bardbarian : MonoBehaviour

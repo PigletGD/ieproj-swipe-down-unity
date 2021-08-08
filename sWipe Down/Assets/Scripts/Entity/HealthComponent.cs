@@ -15,7 +15,7 @@ public class HealthComponent : MonoBehaviour
 
     [SerializeField] HealthBar healthBar = null;
 
-    [SerializeField] GameEventsSO onEnemyKilled = null;
+    [SerializeField] VoidEvent onEnemyKilled = null;
 
     // Start is called before the first frame update
     void OnEnable()
