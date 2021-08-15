@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class TPGenerationBehaviour : TowerBehaviour
 {
-    [SerializeField] private int basegain = 10;
-
     public override void ExecuteAction()
     {
-        manager.IncrementScore(basegain);
+        manager.IncrementScore((int)stats.actionValue);
     }
 
     public override bool ReadyToExecuteAction()
     {
-        if (time >= fireRate) return true;
+        if (time >= stats.fireRate) return true;
         return false;
     }
 }

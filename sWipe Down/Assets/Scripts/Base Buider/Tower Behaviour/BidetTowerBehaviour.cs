@@ -18,7 +18,7 @@ public class BidetTowerBehaviour : TowerBehaviour
 
     public override bool ReadyToExecuteAction()
     {
-        if (time >= fireRate && target != null) return true;
+        if (time >= stats.fireRate && target != null) return true;
 
         return false;
     }

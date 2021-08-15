@@ -36,8 +36,8 @@ public class BuildingManager : MonoBehaviour
 
         GameObject go = Instantiate(baseBuilding.buildingPrefab, new Vector3(0.5f, 0.0f, 0.5f), Quaternion.identity);
 
-        for (int x = -2; x <= 2; x++)
-            for (int y = -2; y <= 2; y++)
+        for (int x = -2; x <= 0; x++)
+            for (int y = -2; y <= 0; y++)
                 buildingDictionary.Add(x.ToString() + " " + y.ToString(), go);
 
         gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
@@ -85,6 +85,7 @@ public class BuildingManager : MonoBehaviour
 
             TowerBehaviour TB = GO.GetComponent<TowerBehaviour>();
             if (TB != null) TB.key = key;
+            TB.SetBuildingTexture();
             buildingDictionary.Add(key, GO);
             gameManager.SpendCurrency(currentBuilding.buildingCost);
 
@@ -104,7 +105,9 @@ public class BuildingManager : MonoBehaviour
 
     public bool CheckLimits(int x, int y)
     {
-        if (x >= -2 && x <= 2 && y >= -2 && y <= 2)
+        Debug.Log(x.ToString() + " " + y.ToString());
+
+        if (x >= -2 && x <= 0 && y >= -2 && y <= 0)
             return false;
 
         return true;
@@ -135,6 +138,7 @@ public class BuildingManager : MonoBehaviour
             currentBuilding = buildingTypes[index];
             mouseManager.objectFollow = objectPools[index].GetObject();
             mouseManager.objectFollow.tag = "Untagged";
+            mouseManager.objectFollow.GetComponent<TowerBehaviour>().SetTransparentTexture();
 
             DisableTowerFollowScripts();
         }

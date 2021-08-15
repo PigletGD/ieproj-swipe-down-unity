@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class TestScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private float setScrollSpeed = -30.0f;
+    [SerializeField] private float setScrollSpeed = -50.0f;
 
     public bool holdingTP = false;
     public bool onScrollArea = false;
@@ -103,7 +103,7 @@ public class TestScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     {
         if (autoScrollSpeed == 0)
         {
-            autoScrollSpeed = -2;
+            autoScrollSpeed = -5;
             return;
         }
 

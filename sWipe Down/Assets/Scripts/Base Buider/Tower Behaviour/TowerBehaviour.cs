@@ -4,9 +4,18 @@ using UnityEngine;
 
 public abstract class TowerBehaviour : MonoBehaviour
 {
+    [SerializeField] protected BuildingStatsSO stats = null;
+
     public Transform target = null;
     public List<Transform> targetList = null;
     public List<Transform> targetedList = null;
+
+    [SerializeField] private GameObject normalModel = default;
+    [SerializeField] private GameObject transparentModel = default;
+
+    [SerializeField] private MeshRenderer MR = default;
+    [SerializeField] private Material transparent = default;
+    [SerializeField] private Material normal = default;
 
     protected float time = 0.0f;
     public float fireRate = 1.0f;
@@ -75,5 +84,17 @@ public abstract class TowerBehaviour : MonoBehaviour
     public void SetTowerValue(int value)
     {
         towerValue = value;
+    }
+
+    public void SetTransparentTexture()
+    {
+        transparentModel.SetActive(true);
+        normalModel.SetActive(false);
+    }
+
+    public void SetBuildingTexture()
+    {
+        normalModel.SetActive(true);
+        transparentModel.SetActive(false);
     }
 }

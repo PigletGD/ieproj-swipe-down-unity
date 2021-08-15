@@ -10,7 +10,7 @@ public class DrainTileBehaviour : TowerBehaviour
     {
         if (!activated)
         {
-            target.GetComponent<EnemyMove>().AddStatusEffect(new RestrainStatus(3));
+            target.GetComponent<EnemyMove>().AddStatusEffect(new RestrainStatus(stats.actionValue));
             activated = true;
         }
 
@@ -27,6 +27,6 @@ public class DrainTileBehaviour : TowerBehaviour
     {
         yield return new WaitForSeconds(3);
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
