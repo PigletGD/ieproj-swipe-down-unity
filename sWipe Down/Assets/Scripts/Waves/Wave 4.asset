@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4418eeafa8c4234eb9838cfab96367a, type: 3}
-  m_Name: Wave 3
+  m_Name: Wave 4
   m_EditorClassIdentifier: 
-  enemyTypes: 000000000200000003000000
-  spawnNumber: 25
-  initialMinTimer: 30
-  initialMaxTimer: 40
+  waveNumber: 4
+  enemyTypes: 00000000010000000200000003000000
+  spawnNumber: 30
+  initialMinTimer: 25
+  initialMaxTimer: 30

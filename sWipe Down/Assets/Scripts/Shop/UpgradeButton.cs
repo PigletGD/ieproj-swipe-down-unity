@@ -9,8 +9,8 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] private IntEvent onUpgradeBought = default;
 
     [SerializeField] private string description = default;
-    [SerializeField] private int price = 0;
-    [SerializeField] private int value = 0;
+    [SerializeField] public int price = 0;
+    [SerializeField] public int value = 0;
 
     [SerializeField] private Button button = default;
     [SerializeField] private Text title = default;

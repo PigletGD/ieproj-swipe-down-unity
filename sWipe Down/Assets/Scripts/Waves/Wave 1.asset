@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4418eeafa8c4234eb9838cfab96367a, type: 3}
   m_Name: Wave 1
   m_EditorClassIdentifier: 
+  waveNumber: 1
   enemyTypes: 0000000001000000
   spawnNumber: 15
   initialMinTimer: 50

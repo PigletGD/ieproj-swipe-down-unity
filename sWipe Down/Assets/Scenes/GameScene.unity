@@ -2321,10 +2321,6 @@ MonoBehaviour:
   - {fileID: 717828669}
   - {fileID: 1557990467}
   - {fileID: 867296369}
-  spawnCount: 0
-  spawnRadius: 20
-  initialMinTimer: 30
-  initialMaxTimer: 42
   waveMessage: {fileID: 626612557}
   waves:
   - {fileID: 11400000, guid: ede472bda64605b489112ed27b370664, type: 2}
@@ -2806,7 +2802,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec16866f48c770b41bd411d3ea8d714a, type: 2}
   - {fileID: 11400000, guid: f110929eca96ca145a8db65af18874a6, type: 2}
   - {fileID: 11400000, guid: 340f867088709864895a72f8ee54da5a, type: 2}
-  - {fileID: 11400000, guid: f4cf637c8e5246f4cb64cc3add997fc1, type: 2}
+  - {fileID: 11400000, guid: 6dbcfbea896dde04b8c0b1ddaa6e30fb, type: 2}
   - {fileID: 11400000, guid: f24b49db1df242f4d98d61013ec28f78, type: 2}
   - {fileID: 11400000, guid: f4cf637c8e5246f4cb64cc3add997fc1, type: 2}
 --- !u!114 &669459134

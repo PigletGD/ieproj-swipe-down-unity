@@ -347,7 +347,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: BASE HAS BEEN DESTORYED
+  m_Text: BASE HAS BEEN DESTROYED
 --- !u!222 &555290623
 CanvasRenderer:
   m_ObjectHideFlags: 0

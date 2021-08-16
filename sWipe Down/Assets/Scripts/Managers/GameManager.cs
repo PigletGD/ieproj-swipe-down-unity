@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +11,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] VoidEvent onUpdateMoney = null;
 
+    [ContextMenuItem("Organize Milestones", "OrganizeTotalValueMilestones")]
     [SerializeField] List<MilestoneSO> milestones = default;
+    [ContextMenuItem("Organize TP Milestones", "OrganizeCurrentTPMilestones")]
     [SerializeField] List<MilestoneSO> tpMilestones = default;
 
     private float tick = 0;
@@ -89,5 +92,21 @@ public class GameManager : MonoBehaviour
             }
             else reached = false;
         } while (reached && tpMilestones.Count > 0);
+    }
+
+    [ContextMenu("Organize Total Value Milestones")]
+    public void OrganizeTotalValueMilestones()
+    {
+        milestones = milestones.OrderBy(e => (e.valueThreshold)).ToList();
+
+        Debug.Log("Finished Organizing Milestones");
+    }
+
+    [ContextMenu("Organize Current TP Milestones")]
+    public void OrganizeCurrentTPMilestones()
+    {
+        tpMilestones = tpMilestones.OrderBy(e => (e.valueThreshold)).ToList();
+
+        Debug.Log("Finished Organizing TP Milestones");
     }
 }

@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] List<ObjectPool> enemyPools = default;
-    [SerializeField] int spawnCount = 0;
-    [SerializeField] float spawnRadius = 0f;
-    [SerializeField] int initialMinTimer = 0;
-    [SerializeField] int initialMaxTimer = 0;
+    private int spawnCount = 0;
+    private float spawnRadius = 0f;
+    private int initialMinTimer = 0;
+    private int initialMaxTimer = 0;
     private float radius = 0;
     private int minTimer = 0;
     private int maxTimer = 0;
@@ -22,6 +23,7 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] Text waveMessage = null;
 
+    [ContextMenuItem("Organize Waves", "OrganizeWaves")]
     [SerializeField] List<WaveSO> waves = default;
 
     List<int> enemyType = new List<int>();
@@ -137,5 +139,13 @@ public class EnemyManager : MonoBehaviour
         }
 
         UpdateTimerText();
+    }
+
+    [ContextMenu("Organize Waves")]
+    public void OrganizeWaves()
+    {
+        waves = waves.OrderBy(e => e.waveNumber).ToList();
+        
+        Debug.Log("Finished Organizing Waves");
     }
 }
