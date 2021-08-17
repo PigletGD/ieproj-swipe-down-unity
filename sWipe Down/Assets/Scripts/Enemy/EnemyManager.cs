@@ -17,16 +17,24 @@ public class EnemyManager : MonoBehaviour
     private int remainingEnemies = 0;
     private int timerInteger = 0;
     private float timerForNextSpawn = 0f;
+    private float currentTimerForNextSpawn = 0f;
     private bool waveOngoing = false;
 
     private bool startEnemyWaveSpawning = false;
 
     [SerializeField] Text waveMessage = null;
+    [SerializeField] Slider waveSlider = null;
+    [SerializeField] Animator sliderAnimator = null;
 
     [ContextMenuItem("Organize Waves", "OrganizeWaves")]
     [SerializeField] List<WaveSO> waves = default;
 
     List<int> enemyType = new List<int>();
+
+    [SerializeField] private Transform baseTransform;
+    [SerializeField] private float spawnDistanceFromBase;
+    [SerializeField] private float spawnWidth;
+    [SerializeField] private float spawnLength;
 
     // Start is called before the first frame update
     void Start()
@@ -38,10 +46,12 @@ public class EnemyManager : MonoBehaviour
     {
         if (!waveOngoing && startEnemyWaveSpawning)
         {
-            timerForNextSpawn -= Time.deltaTime;
+            currentTimerForNextSpawn += Time.deltaTime;
 
-            if (timerForNextSpawn <= 0) SpawnEnemyWave();
-            else if (timerForNextSpawn <= (float)timerInteger) UpdateTimerText();
+            waveSlider.value = currentTimerForNextSpawn;
+
+            if (currentTimerForNextSpawn > timerForNextSpawn) SpawnEnemyWave();
+            //else if (timerForNextSpawn <= (float)timerInteger) UpdateTimerText();
         }
     }
 
@@ -56,17 +66,22 @@ public class EnemyManager : MonoBehaviour
 
     void SpawnEnemyWave()
     {
+        sliderAnimator.SetTrigger("WaveStart");
+
+        int direction = Random.Range(0, 4);
+
         GameObject GO;
         for (int i = 0; i < spawnCount; i++)
         {
             GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
-            GO.transform.position = RandomCircle();
+            //GO.transform.position = RandomCircle();
+            GO.transform.position = RandomAtDirection(direction);
         }
 
         remainingEnemies = spawnCount;
         waveOngoing = true;
 
-        waveMessage.text = "There are " + remainingEnemies + " enemies remaining";
+        waveMessage.text = "There are " + remainingEnemies + " Enemies Remaining";
     }
 
     public void KilledEnemy()
@@ -77,11 +92,17 @@ public class EnemyManager : MonoBehaviour
         {
             waveOngoing = false;
 
+            currentTimerForNextSpawn = 0;
             timerForNextSpawn = Random.Range(minTimer, maxTimer);
 
-            UpdateTimerText();
+            waveSlider.minValue = 0;
+            waveSlider.maxValue = timerForNextSpawn;
+
+            sliderAnimator.SetTrigger("WaveEnd");
+
+            //UpdateTimerText();
         }
-        else waveMessage.text = "There are " + remainingEnemies + " enemies remaining";
+        else waveMessage.text = "There are " + remainingEnemies + " Enemies Remaining";
     }
 
     void ResetValues()
@@ -114,9 +135,44 @@ public class EnemyManager : MonoBehaviour
         return pos;
     }
 
+    Vector3 RandomAtDirection(int direction)
+    {
+        Vector3 pos = new Vector3(0.5f, 0.0f, 0.5f);
+        pos.y = 0;
+
+        Vector3 delta = Vector3.zero;
+
+        float randomLength = Random.Range(spawnLength * -0.5f, spawnLength * 0.5f);
+        float randomWidth = Random.Range(spawnWidth * -0.5f, spawnWidth * 0.5f);
+
+        switch (direction)
+        {
+            case 0:
+                delta.x = -spawnDistanceFromBase + randomLength;
+                delta.z = randomWidth;
+                break;
+            case 1:
+                delta.x = spawnDistanceFromBase + randomLength;
+                delta.z = randomWidth;
+                break;
+            case 2:
+                delta.z = -spawnDistanceFromBase + randomLength;
+                delta.x = randomWidth;
+                break;
+            case 3:
+                delta.z = -spawnDistanceFromBase + randomLength;
+                delta.x = randomWidth;
+                break;
+        }
+
+        return pos + delta;
+    }
+
     public void AdvanceToNextWave()
     {
         if (waves.Count <= 0) return;
+
+        waveSlider.gameObject.SetActive(true);
 
         spawnCount = waves[0].spawnNumber;
 
@@ -135,10 +191,13 @@ public class EnemyManager : MonoBehaviour
             timerForNextSpawn = Random.Range(minTimer, maxTimer);
             timerInteger = (int)timerForNextSpawn - 1;
 
+            waveSlider.minValue = 0;
+            waveSlider.maxValue = timerForNextSpawn;
+
             startEnemyWaveSpawning = true;
         }
 
-        UpdateTimerText();
+        //UpdateTimerText();
     }
 
     [ContextMenu("Organize Waves")]

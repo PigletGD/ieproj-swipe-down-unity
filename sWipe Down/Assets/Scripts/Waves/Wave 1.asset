@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveNumber: 1
   enemyTypes: 0000000001000000
-  spawnNumber: 15
+  spawnNumber: 10
   initialMinTimer: 50
   initialMaxTimer: 60

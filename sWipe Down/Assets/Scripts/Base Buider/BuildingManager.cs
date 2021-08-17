@@ -10,7 +10,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] BuildingSO baseBuilding = null;
     [SerializeField] List<BuildingSO> buildingTypes = null;
     private Dictionary<string, GameObject> buildingDictionary = null;
-    private int currentBuildingType = -1;
+    public int currentBuildingType = -1;
     [SerializeField] Transform objectPoolParent = null;
     private List<ObjectPool> objectPools = new List<ObjectPool>();
 

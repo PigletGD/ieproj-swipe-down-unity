@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class EventVector3 : UnityEvent<Transform> { }
@@ -52,6 +53,10 @@ public class MouseManager : MonoBehaviour
     private bool isHolding = false;
     private Vector3 lastCursorPos = Vector3.zero;
 
+    [SerializeField] Image icon;
+    [SerializeField] RectTransform iconImage;
+    [SerializeField] Sprite[] iconSprites;
+
     private void Awake()
     {
 #if UNITY_ANDROID
@@ -83,9 +88,21 @@ public class MouseManager : MonoBehaviour
                 if (IsPointerOverUIObject())
                 {
                     objectFollow.SetActive(false);
+                    iconImage.gameObject.SetActive(true);
+
+                    int index = BuildingManager.instance.currentBuildingType;
+                    if (index == 0) icon.sprite = iconSprites[0];
+                    else if (index == 1) icon.sprite = iconSprites[1];
+                    else iconImage.gameObject.SetActive(false);
+
+                    iconImage.position = Input.mousePosition;
                     return;
                 }
-                else objectFollow.SetActive(true);
+                else
+                {
+                    objectFollow.SetActive(true);
+                    iconImage.gameObject.SetActive(false);
+                }
 
                 cursorPos = new Vector3(Mathf.FloorToInt(hit.point.x / tileSize) * tileSize + (tileSize * 0.5f), 0f, Mathf.FloorToInt(hit.point.z / tileSize) * tileSize + (tileSize * 0.5f));
 
@@ -110,6 +127,10 @@ public class MouseManager : MonoBehaviour
                         }
                     }
                 }
+            }
+            else
+            {
+                iconImage.gameObject.SetActive(false);
             }
         }
 
@@ -164,6 +185,11 @@ public class MouseManager : MonoBehaviour
                     mainCam.orthographicSize -= 1;
                     zoomAmount--;
                 }
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                BuildingManager.instance.ChangeCurrentlySelectedBuilding(-1);
             }
         }
         else
