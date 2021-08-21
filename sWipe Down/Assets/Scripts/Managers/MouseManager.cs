@@ -4,29 +4,17 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[System.Serializable]
-public class EventVector3 : UnityEvent<Transform> { }
-
 public class MouseManager : MonoBehaviour
 {
     private bool onMobile = false;
 
     public LayerMask clickableLayer;
 
-    public Texture2D pointer = null;
-    public Texture2D target = null;
-    public Texture2D doorway = null;
-
-    public EventVector3 OnClickEnvironment;
-
-    // Building Placing Stuff [remove later]
-    public GameObject player = null;
-    public GameObject currentlySelected = null;
-    public GameObject currentlyPlacing = null;
-
     // Test prefab for building
     public GameObject objectFollow = null;
     [SerializeField] float tileSize = 0;
+    [SerializeField] float tileOffsetX = 0;
+    [SerializeField] float tileOffsetZ = 0;
 
     // Camera Transformation
     public Transform cameraRig = null;
@@ -72,8 +60,9 @@ public class MouseManager : MonoBehaviour
 
     void Update()
     {
-        if (!onMobile) MouseControls();
-        else MobileControls();
+        MouseControls();
+
+        UpdateControls();
     }
 
     private void MouseControls()
@@ -104,9 +93,10 @@ public class MouseManager : MonoBehaviour
                     iconImage.gameObject.SetActive(false);
                 }
 
-                cursorPos = new Vector3(Mathf.FloorToInt(hit.point.x / tileSize) * tileSize + (tileSize * 0.5f), 0f, Mathf.FloorToInt(hit.point.z / tileSize) * tileSize + (tileSize * 0.5f));
+                cursorPos = new Vector3((Mathf.FloorToInt((hit.point.x - (tileOffsetX)) / tileSize) * tileSize + (tileSize * 0.5f)) + tileOffsetX, 0f, (Mathf.FloorToInt((hit.point.z - tileOffsetZ) / tileSize) * tileSize + (tileSize * 0.5f)) + tileOffsetZ);
+                Vector3 checkPos = new Vector3((cursorPos.x - tileOffsetX - (tileSize * 0.5f)) / tileSize, 0, (cursorPos.z - tileOffsetZ - (tileSize * 0.5f)) / tileSize);
 
-                if (BuildingManager.instance.CheckIfTileOccupied(cursorPos))
+                if (BuildingManager.instance.CheckIfTileOccupied(checkPos))
                 {
                     objectFollow.SetActive(false);
                 }
@@ -123,7 +113,7 @@ public class MouseManager : MonoBehaviour
                         // Do world stuff here
                         if (!IsPointerOverUIObject())
                         {
-                            BuildingManager.instance.InstantiateBuilding(cursorPos);
+                            BuildingManager.instance.InstantiateBuilding(checkPos, cursorPos);
                         }
                     }
                 }
@@ -284,8 +274,8 @@ public class MouseManager : MonoBehaviour
                     int x = (int)(lastCursorPos.x - 0.5f);
                     int y = (int)(lastCursorPos.z - 0.5f);
 
-                    if (CheckLimits(x, y)) BuildingManager.instance.InstantiateBuilding(lastCursorPos);
-                    else objectFollow.SetActive(false);
+                    //if (CheckLimits(x, y)) BuildingManager.instance.InstantiateBuilding(lastCursorPos);
+                    //else objectFollow.SetActive(false);
 
                 }
 
@@ -311,13 +301,69 @@ public class MouseManager : MonoBehaviour
         return results.Count > 0;
     }
 
-    private void DeletePlacingInstance()
-    {
-        Destroy(currentlyPlacing);
-        currentlyPlacing = null;
-    }
-
     public void TurnOnMovingMode() => isMovingMode = true;
 
     public void TurnOnBuildingMode() => isMovingMode = false;
+
+    #region InputSystem
+
+    private float forward = 0.0f;
+    private float rightward = 0.0f;
+    private float speed = 5.0f;
+    private float shiftMultiplier = 1.0f;
+    private void UpdateControls()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            forward += speed;
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            forward -= speed;
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            rightward -= speed;
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            rightward += speed;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            shiftMultiplier = 3.0f;
+        }
+
+
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            forward -= speed;
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            forward += speed;
+        }
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            rightward += speed;
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            rightward -= speed;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            shiftMultiplier = 1.0f;
+        }
+
+
+        newPosition += (cameraRig.transform.forward + cameraRig.transform.right) * forward * shiftMultiplier * Time.deltaTime;
+        newPosition += (-cameraRig.transform.forward + cameraRig.transform.right) * rightward * shiftMultiplier * Time.deltaTime;
+
+        //newPosition.Translate((cameraRig.transform.forward + cameraRig.transform.right) * forward * shiftMultiplier * Time.deltaTime);
+        //newPosition.Translate((-cameraRig.transform.forward + cameraRig.transform.right) * rightward * shiftMultiplier * Time.deltaTime);
+
+
+    }
+    #endregion
 }

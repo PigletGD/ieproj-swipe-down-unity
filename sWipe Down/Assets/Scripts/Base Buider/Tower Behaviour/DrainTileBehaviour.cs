@@ -27,6 +27,7 @@ public class DrainTileBehaviour : TowerBehaviour
     {
         yield return new WaitForSeconds(3);
 
-        gameObject.SetActive(false);
+        BuildingManager.instance.RemoveBuildingFromDictionary(key);
+        GetComponent<PooledObject>().ReturnObject();
     }
 }

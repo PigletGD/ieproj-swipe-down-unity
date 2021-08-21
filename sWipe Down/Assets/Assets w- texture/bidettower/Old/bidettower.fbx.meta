@@ -1,29 +1,14 @@
 fileFormatVersion: 2
-guid: aaffde326f0f3b04db81110e9bac08a2
+guid: 588798f465d9e0742a7e5dd3c77f9bf9
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
   externalObjects:
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blinn1
-    second: {fileID: 2100000, guid: 998077fb96c338546bb59ded50ce8dfc, type: 2}
-  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: DT_Midterms_121720_holyseat_bumpmap
-    second: {fileID: 2800000, guid: c0a1502e1dd77d14494d0980b546c284, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: DT_Midterms_121720_holyseat_colormap
-    second: {fileID: 2800000, guid: 2943d08591b70984ab532ade5653fbcc, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: DT_Midterms_121720_holyseat_specularmap
-    second: {fileID: 2800000, guid: c5dc09dc903933e41a1e324f7d0b854d, type: 3}
+      name: JA_Midterms_121720_BidetTower_colormap
+    second: {fileID: 2800000, guid: 2d3a4afa245a4c040af75e5c98d46b51, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

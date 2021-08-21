@@ -54,9 +54,19 @@ public class ObjectPool : MonoBehaviour
 
     public void ReturnObject(GameObject GO)
     {
-        GO.SetActive(false);
+        GO.transform.position = new Vector3(9999, 0, 9999);
+
         usedPool.Remove(GO);
         availablePool.Add(GO);
+
+        StartCoroutine(DisableObject(GO));
+    }
+
+    IEnumerator DisableObject(GameObject GO)
+    {
+        yield return new WaitForEndOfFrame();
+
+        GO.SetActive(false);
     }
 
     public List<GameObject> GetAVailableObjectList()
