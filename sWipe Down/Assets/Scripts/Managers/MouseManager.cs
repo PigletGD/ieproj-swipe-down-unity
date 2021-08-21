@@ -74,6 +74,8 @@ public class MouseManager : MonoBehaviour
     {
         if (!onMobile) MouseControls();
         else MobileControls();
+
+        UpdateControls();
     }
 
     private void MouseControls()
@@ -320,4 +322,66 @@ public class MouseManager : MonoBehaviour
     public void TurnOnMovingMode() => isMovingMode = true;
 
     public void TurnOnBuildingMode() => isMovingMode = false;
+
+    #region InputSystem
+
+    private float forward = 0.0f;
+    private float rightward = 0.0f;
+    private float speed = 5.0f;
+    private float shiftMultiplier = 1.0f;
+    private void UpdateControls()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            forward += speed;
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            forward -= speed;
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            rightward -= speed;
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            rightward += speed;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            shiftMultiplier = 3.0f;
+        }
+
+
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            forward -= speed;
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            forward += speed;
+        }
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            rightward += speed;
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            rightward -= speed;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            shiftMultiplier = 1.0f;
+        }
+
+
+        newPosition += (cameraRig.transform.forward + cameraRig.transform.right) * forward * shiftMultiplier * Time.deltaTime;
+        newPosition += (-cameraRig.transform.forward + cameraRig.transform.right) * rightward * shiftMultiplier * Time.deltaTime;
+
+        //newPosition.Translate((cameraRig.transform.forward + cameraRig.transform.right) * forward * shiftMultiplier * Time.deltaTime);
+        //newPosition.Translate((-cameraRig.transform.forward + cameraRig.transform.right) * rightward * shiftMultiplier * Time.deltaTime);
+
+
+    }
+    #endregion
 }
