@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
         TotalValue += value;
         moneyText.UpdateText(Currency);
         onUpdateMoney.Raise();
+
+        AudioManager.instance.Play("Tissue");
     }
 
     public void SpendCurrency(int value)
