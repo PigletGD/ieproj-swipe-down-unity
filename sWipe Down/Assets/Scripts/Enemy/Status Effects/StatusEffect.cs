@@ -8,11 +8,27 @@ public enum Duration
     LASTING
 };
 
+
+public enum StatusType
+{ 
+    Slow = 0,
+    Restrain = 1
+}
+
 public abstract class StatusEffect
 {
     public string name;
     public abstract void ApplyEffect(GameObject enemy);
+    public void SetParticleSystem(GameObject particleSystem)
+    {
+        if (particleSystem != null)
+        {
+        }
+    }
 
     public Duration durationType = Duration.INSTANTANEOUS;
     public float duration;
+    public StatusType statusType;
+
+    private GameObject particleSystemRef;
 }

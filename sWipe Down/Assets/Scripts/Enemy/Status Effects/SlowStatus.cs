@@ -11,6 +11,7 @@ public class SlowStatus : StatusEffect
         this.slowPercentValue = slowPercent;
         duration = dur;
         durationType = Duration.LASTING;
+        this.statusType = StatusType.Slow;
     }
 
     private float slowPercentValue;
