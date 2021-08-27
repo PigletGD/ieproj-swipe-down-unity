@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class MouseManager : MonoBehaviour
 {
-    private bool onMobile = false;
-
     public LayerMask clickableLayer;
 
     // Test prefab for building
@@ -47,11 +45,11 @@ public class MouseManager : MonoBehaviour
 
     private void Awake()
     {
-#if UNITY_ANDROID
+/*#if UNITY_ANDROID
         onMobile = true;
 #else
         onMobile = false;
-#endif
+#endif*/
 
         //GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
         newPosition = cameraRig.position;
@@ -80,8 +78,7 @@ public class MouseManager : MonoBehaviour
                     iconImage.gameObject.SetActive(true);
 
                     int index = BuildingManager.instance.currentBuildingType;
-                    if (index == 0) icon.sprite = iconSprites[0];
-                    else if (index == 1) icon.sprite = iconSprites[1];
+                    if (index < iconSprites.Length) icon.sprite = iconSprites[index];
                     else iconImage.gameObject.SetActive(false);
 
                     iconImage.position = Input.mousePosition;

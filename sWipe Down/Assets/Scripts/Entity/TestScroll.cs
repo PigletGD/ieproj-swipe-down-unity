@@ -34,7 +34,7 @@ public class TestScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
             currentClickPos = camMain.ScreenToWorldPoint(Input.mousePosition); 
         }
 
-        if (Input.GetKeyDown(KeyCode.K)) AddAutoScrollMultiplier(2);
+        //if (Input.GetKeyDown(KeyCode.K)) AddAutoScrollMultiplier(2);
 
         CheckScroll();
 
@@ -113,5 +113,10 @@ public class TestScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     public void AddGoldPaperChance(int value)
     {
         goldPaperChance += value;
+    }
+
+    public void AddPullPower(int value)
+    {
+        setScrollSpeed -= value;
     }
 }
