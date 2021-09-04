@@ -18,7 +18,7 @@ public class PaperManager : MonoBehaviour
             go.transform.SetParent(parent, false);
             go.transform.localScale = Vector3.one;
             RectTransform rt = go.GetComponent<RectTransform>();
-            rt.localPosition = new Vector3(0, 140 + 200*i, 0);
+            rt.localPosition = new Vector3(0, 140 + 233*i, 0);
             PaperBehaviour cur = go.GetComponent<PaperBehaviour>();
             cur.isInitial = true;
             toiletPapers.Add(go.GetComponent<PaperBehaviour>());
@@ -37,7 +37,7 @@ public class PaperManager : MonoBehaviour
         cur.neighbor = rt;
         Vector3 pos = rt.localPosition;
 
-        go.GetComponent<RectTransform>().localPosition = new Vector3(0, pos.y + 130 + testScroll.ScrollSpeed, 0);
+        go.GetComponent<RectTransform>().localPosition = new Vector3(0, pos.y + 140 + testScroll.ScrollSpeed, 0);
 
         toiletPapers.Add(cur);
     }
