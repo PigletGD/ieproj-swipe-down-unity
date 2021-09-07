@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class Split : MonoBehaviour, IDeathHandler
 {
-    [SerializeField] GameObject offspring;
     [SerializeField] int offspringCount;
+
+    private void Start()
+    {
+        GetComponent<HealthComponent>().AddDeathHandler(this);
+    }
+
     public void OnDeath()
     {
-        for (int i = 0; i < offspringCount; i++)
+        GameObject manager = GameObject.Find("Enemy Manager");
+        if (manager != null)
         {
-
+            for (int i = 0; i < offspringCount; i++)
+            {
+                manager.GetComponent<EnemyManager>().SpawnEnemy(0, this.transform.position);
+            }
         }
     }
 }
