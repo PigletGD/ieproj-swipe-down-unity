@@ -78,8 +78,8 @@ public class BuildingManager : MonoBehaviour
 
         if (!buildingDictionary.ContainsKey(key))
         {
-            Debug.Log(key);
-            Debug.Log(position);
+            //Debug.Log(key);
+           // Debug.Log(position);
             //GameObject go = Instantiate(currentBuilding.buildingPrefab, new Vector3(position.x, 0.0f, position.z), Quaternion.identity);
             GameObject GO = objectPools[currentBuildingType].GetObject();
             GO.transform.position = new Vector3(spawnPosition.x, 0.0f, spawnPosition.z);
@@ -100,11 +100,11 @@ public class BuildingManager : MonoBehaviour
         int x = Mathf.RoundToInt(position.x);
         int y = Mathf.RoundToInt(position.z);
 
-        Debug.Log(position);
+        //Debug.Log(position);
 
         string key = x.ToString() + " " + y.ToString();
 
-        Debug.Log(key);
+        //Debug.Log(key);
 
         return buildingDictionary.ContainsKey(key);
     }
