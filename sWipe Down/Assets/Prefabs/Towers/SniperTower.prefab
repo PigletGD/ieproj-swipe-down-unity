@@ -612,6 +612,7 @@ MonoBehaviour:
   transparent: {fileID: 0}
   normal: {fileID: 0}
   fireRate: 3
+  maxFireRate: 3
   key: 
   towerValue: 0
   bullet: {fileID: 7892922164849568831, guid: 5f634928279d0d645a9ebd1d858a89cb, type: 3}

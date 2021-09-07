@@ -709,6 +709,7 @@ MonoBehaviour:
   transparent: {fileID: 0}
   normal: {fileID: 0}
   fireRate: 5
+  maxFireRate: 5
   key: 
   towerValue: 0
   collider: {fileID: 536354767}
