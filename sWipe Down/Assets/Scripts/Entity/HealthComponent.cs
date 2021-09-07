@@ -41,7 +41,6 @@ public class HealthComponent : MonoBehaviour
         {
             currentHealth = 0;
             Die();
-            Debug.Log("Dead");
             OnDeath();
             deadAlready = true;
         }

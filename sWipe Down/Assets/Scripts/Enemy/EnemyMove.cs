@@ -109,10 +109,32 @@ public class EnemyMove : MonoBehaviour
 
     public void AddStatusEffect(StatusEffect statusEffect)
     {
-        statusEffectsList.Add(statusEffect);
-        if (statusParticleSystemDictionary.ContainsKey(statusEffect.statusType) && statusParticleSystemDictionary[statusEffect.statusType] != null)
+        if (statusEffect.durationType == Duration.LASTING)
         {
-            statusParticleSystemDictionary[statusEffect.statusType].StatusUpdate(statusEffect);
+            bool found = false;
+
+            foreach (StatusEffect effect in statusEffectsList)
+            {
+                if (effect.statusType == statusEffect.statusType)
+                {
+                    effect.duration = statusEffect.duration;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                statusEffectsList.Add(statusEffect);
+                if (statusParticleSystemDictionary.ContainsKey(statusEffect.statusType) && statusParticleSystemDictionary[statusEffect.statusType] != null)
+                {
+                    statusParticleSystemDictionary[statusEffect.statusType].StatusUpdate(statusEffect);
+                }
+            }
+        }
+        else
+        {
+            statusEffectsList.Add(statusEffect);
         }
     }
 
