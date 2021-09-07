@@ -18,7 +18,7 @@ public enum StatusType
 public abstract class StatusEffect
 {
     public string name;
-    public abstract void ApplyEffect(GameObject enemy);
+    public abstract void ApplyEffect(GameObject target);
     public void SetParticleSystem(GameObject particleSystem)
     {
         if (particleSystem != null)
