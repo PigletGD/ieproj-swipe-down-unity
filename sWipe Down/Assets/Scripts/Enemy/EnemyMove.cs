@@ -16,8 +16,8 @@ public class EnemyMove : MonoBehaviour
     [SerializeField] public Dictionary<StatusType, StatusParticleSystem> statusParticleSystemDictionary;
     [SerializeField] List<IAttackHandler> attackHandlerList;
 
-    private float timeElapsed = 0f;
-    [SerializeField] float attackRate = 0f;
+    protected float timeElapsed = 0f;
+    [SerializeField] protected float attackRate = 0f;
 
     private void Awake()
     {
@@ -166,7 +166,7 @@ public class EnemyMove : MonoBehaviour
         attackRate = rate;
     }
 
-    private void OnAttack()
+    public void OnAttack()
     {
         if (attackHandlerList != null)
         {
