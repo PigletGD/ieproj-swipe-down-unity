@@ -5341,6 +5341,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9765313e1011fb042a184608f2cb93ac, type: 2}
   - {fileID: 11400000, guid: 6da0f04634b56834b925996acd21b1e5, type: 2}
   - {fileID: 11400000, guid: b9e3630b4f603eb4a9523e6196dd6f8e, type: 2}
+  - {fileID: 11400000, guid: 483c0a67ab3acf64aa4b73002b77f242, type: 2}
   currentBuildingType: -1
   objectPoolParent: {fileID: 434735401}
   gameManager: {fileID: 669459133}
