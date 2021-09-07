@@ -13,7 +13,8 @@ public class EnemyMove : MonoBehaviour
     public List<Transform> targetList = null;
     public List<Transform> targetedList = null;
     public List<StatusEffect> statusEffectsList = new List<StatusEffect>();
-    [SerializeField]public Dictionary<StatusType, StatusParticleSystem> statusParticleSystemDictionary;
+    [SerializeField] public Dictionary<StatusType, StatusParticleSystem> statusParticleSystemDictionary;
+    [SerializeField] List<IAttackHandler> attackHandlerList;
 
     private float timeElapsed = 0f;
     [SerializeField] float attackRate = 0f;
@@ -27,6 +28,8 @@ public class EnemyMove : MonoBehaviour
         {
             statusParticleSystemDictionary[sps.statusType] = sps;
         }
+
+        attackHandlerList = new List<IAttackHandler>();
     }
 
     // Start is called before the first frame update
@@ -50,10 +53,12 @@ public class EnemyMove : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if((collision.gameObject.tag == "Building" || collision.gameObject.tag == "Base") && timeElapsed > attackRate)
+        if ((collision.gameObject.tag == "Building" || collision.gameObject.tag == "Base") && timeElapsed > attackRate)
         {
             timeElapsed = 0;
             collision.gameObject.GetComponent<HealthComponent>().TakeDamage(1);
+
+            OnAttack();
         }
     }
 
@@ -69,7 +74,7 @@ public class EnemyMove : MonoBehaviour
             owner.LookAt(new Vector3(target.position.x, 0.0f, target.position.z));
 
             rb.MovePosition(owner.position + (owner.forward * speed * Time.deltaTime));
-            
+
         }
         else Debug.LogWarning("ERROR: NOT SUPPOSED TO BE HERE");
     }
@@ -94,7 +99,7 @@ public class EnemyMove : MonoBehaviour
     {
         foreach (Transform targeted in targetedList)
         {
-            if(targeted != null)
+            if (targeted != null)
             {
                 TowerBehaviour tb = targeted.GetComponent<TowerBehaviour>();
                 if (tb != null) tb.RemoveTarget(transform);
@@ -114,7 +119,7 @@ public class EnemyMove : MonoBehaviour
     private void ApplyStatusEffects(float deltaTime)
     {
         speed = maxSpeed;
-        for (int i = statusEffectsList.Count -1; i >= 0; i--)
+        for (int i = statusEffectsList.Count - 1; i >= 0; i--)
         {
             StatusEffect statusEffect = statusEffectsList[i];
             statusEffect.ApplyEffect(this.gameObject);
@@ -128,7 +133,7 @@ public class EnemyMove : MonoBehaviour
                 if (statusEffect.duration <= 0)
                 {
                     statusEffectsList.RemoveAt(i);
-                    
+
                 }
             }
         }
@@ -137,5 +142,26 @@ public class EnemyMove : MonoBehaviour
     public void SetAttackRate(float rate)
     {
         attackRate = rate;
+    }
+
+    private void OnAttack()
+    {
+        if (attackHandlerList != null)
+        {
+            foreach (IAttackHandler listener in attackHandlerList)
+            {
+                listener.OnAttack();
+            }
+        }
+    }
+
+    public void AddAttackHandler(IAttackHandler handler)
+    {
+        attackHandlerList.Add(handler);
+    }
+
+    public void RemoveAttackHandler(IAttackHandler handler)
+    {
+        attackHandlerList.Remove(handler);
     }
 }
