@@ -34,6 +34,12 @@ public abstract class TowerBehaviour : MonoBehaviour
         manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
     }
 
+    private void OnEnable()
+    {
+        targetList = new List<Transform>();
+        targetedList = new List<Transform>();
+    }
+
     void Update() => ReadyAction();
 
     public abstract void ExecuteAction();

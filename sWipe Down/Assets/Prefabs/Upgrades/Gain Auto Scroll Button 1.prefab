@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: -1322929332158218840}
   - component: {fileID: -3977355434515852356}
   m_Layer: 5
-  m_Name: Gain Auto Scroll Button
+  m_Name: Gain Auto Scroll Button 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,7 +230,7 @@ MonoBehaviour:
   onCurrencySpent: {fileID: 11400000, guid: fabffd3a6daa6944799132cde4e4b164, type: 2}
   onUpgradeBought: {fileID: 11400000, guid: 33381588ec562934781ceeb0751f0b5c, type: 2}
   description: Auto TP Puller
-  price: 50
+  price: 35
   value: 2
   button: {fileID: 1020369849130988728}
   title: {fileID: 8820211201090063517}

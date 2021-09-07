@@ -13,9 +13,21 @@ public class EnemyMove : MonoBehaviour
     public List<Transform> targetList = null;
     public List<Transform> targetedList = null;
     public List<StatusEffect> statusEffectsList = new List<StatusEffect>();
+    [SerializeField]public Dictionary<StatusType, StatusParticleSystem> statusParticleSystemDictionary;
 
     private float timeElapsed = 0f;
     [SerializeField] float attackRate = 0f;
+
+    private void Awake()
+    {
+        statusParticleSystemDictionary = new Dictionary<StatusType, StatusParticleSystem>();
+
+        StatusParticleSystem[] spsList = this.gameObject.GetComponentsInChildren<StatusParticleSystem>();
+        foreach (StatusParticleSystem sps in spsList)
+        {
+            statusParticleSystemDictionary[sps.statusType] = sps;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -93,6 +105,10 @@ public class EnemyMove : MonoBehaviour
     public void AddStatusEffect(StatusEffect statusEffect)
     {
         statusEffectsList.Add(statusEffect);
+        if (statusParticleSystemDictionary.ContainsKey(statusEffect.statusType) && statusParticleSystemDictionary[statusEffect.statusType] != null)
+        {
+            statusParticleSystemDictionary[statusEffect.statusType].StatusUpdate(statusEffect);
+        }
     }
 
     private void ApplyStatusEffects(float deltaTime)
@@ -112,6 +128,7 @@ public class EnemyMove : MonoBehaviour
                 if (statusEffect.duration <= 0)
                 {
                     statusEffectsList.RemoveAt(i);
+                    
                 }
             }
         }

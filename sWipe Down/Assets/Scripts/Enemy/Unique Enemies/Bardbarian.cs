@@ -3,6 +3,7 @@ using UnityEngine;
 public class Bardbarian : MonoBehaviour
 {
     [SerializeField] public int curtainHP { get; private set; } = 10;
+    [SerializeField] GameObject rageParticleSystem;
 
     private HealthComponent healthComponent;
     private bool rage = false;
@@ -29,5 +30,6 @@ public class Bardbarian : MonoBehaviour
         gameObject.GetComponentInChildren<EnemyMove>().maxSpeed = rageMoveSpeed;
         gameObject.GetComponentInChildren<EnemyMove>().SetAttackRate(rageAttackSpeed);
         rage = true;
+        rageParticleSystem.SetActive(true);
     }
 }

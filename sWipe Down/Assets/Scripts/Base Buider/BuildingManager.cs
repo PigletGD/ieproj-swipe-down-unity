@@ -34,10 +34,10 @@ public class BuildingManager : MonoBehaviour
     {
         buildingDictionary = new Dictionary<string, GameObject>();
 
-        GameObject go = Instantiate(baseBuilding.buildingPrefab, new Vector3(0.5f, 0.0f, 0.5f), Quaternion.identity);
+        GameObject go = Instantiate(baseBuilding.buildingPrefab, new Vector3(0.43f, 0.0f, 1.13f), Quaternion.identity);
 
-        for (int x = -2; x <= 0; x++)
-            for (int y = -2; y <= 0; y++)
+        for (int x = -2; x <= -1; x++)
+            for (int y = -1; y <= 0; y++)
                 buildingDictionary.Add(x.ToString() + " " + y.ToString(), go);
 
         gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
@@ -67,20 +67,22 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
-    public void InstantiateBuilding(Vector3 position)
+    public void InstantiateBuilding(Vector3 position, Vector3 spawnPosition)
     {
         if (currentBuilding == null) return;
 
-        int x = (int)(position.x - 0.5f);
-        int y = (int)(position.z - 0.5f);
+        int x = Mathf.RoundToInt(position.x);
+        int y = Mathf.RoundToInt(position.z);
 
         string key = x.ToString() + " " + y.ToString();
 
-        if (CheckLimits(x, y) && !buildingDictionary.ContainsKey(key))
+        if (!buildingDictionary.ContainsKey(key))
         {
+            Debug.Log(key);
+            Debug.Log(position);
             //GameObject go = Instantiate(currentBuilding.buildingPrefab, new Vector3(position.x, 0.0f, position.z), Quaternion.identity);
             GameObject GO = objectPools[currentBuildingType].GetObject();
-            GO.transform.position = new Vector3(position.x, 0.0f, position.z);
+            GO.transform.position = new Vector3(spawnPosition.x, 0.0f, spawnPosition.z);
             GO.tag = "Building";
 
             TowerBehaviour TB = GO.GetComponent<TowerBehaviour>();
@@ -95,18 +97,20 @@ public class BuildingManager : MonoBehaviour
     
     public bool CheckIfTileOccupied(Vector3 position)
     {
-        int x = (int)(position.x - 0.5f);
-        int y = (int)(position.z - 0.5f);
+        int x = Mathf.RoundToInt(position.x);
+        int y = Mathf.RoundToInt(position.z);
+
+        Debug.Log(position);
 
         string key = x.ToString() + " " + y.ToString();
+
+        Debug.Log(key);
 
         return buildingDictionary.ContainsKey(key);
     }
 
     public bool CheckLimits(int x, int y)
     {
-        Debug.Log(x.ToString() + " " + y.ToString());
-
         if (x >= -2 && x <= 0 && y >= -2 && y <= 0)
             return false;
 
@@ -124,7 +128,10 @@ public class BuildingManager : MonoBehaviour
         {
             currentBuildingType = -1;
             if (mouseManager.objectFollow != null)
+            {
+                mouseManager.objectFollow.tag = "Building";
                 mouseManager.objectFollow.GetComponent<PooledObject>().ReturnObject();
+            }
             currentBuilding = null;
             mouseManager.objectFollow = null;
         }

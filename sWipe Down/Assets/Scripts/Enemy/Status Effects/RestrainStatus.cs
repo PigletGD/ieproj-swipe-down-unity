@@ -8,6 +8,7 @@ public class RestrainStatus : StatusEffect
     {
         duration = dur;
         durationType = Duration.LASTING;
+        this.statusType = StatusType.Restrain;
     }
 
     public override void ApplyEffect(GameObject enemy)

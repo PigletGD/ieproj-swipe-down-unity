@@ -71,17 +71,43 @@ public class EnemyManager : MonoBehaviour
         int direction = Random.Range(0, 4);
 
         GameObject GO;
-        for (int i = 0; i < spawnCount; i++)
+        if (direction <= 1)
         {
-            GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
-            //GO.transform.position = RandomCircle();
-            GO.transform.position = RandomAtDirection(direction);
+            for (int i = 0; i < spawnCount / 2; i++)
+            {
+                GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                //GO.transform.position = RandomCircle();
+                GO.transform.position = RandomAtDirection(0);
+            }
+
+            for (int i = 0; i < spawnCount / 2; i++)
+            {
+                GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                //GO.transform.position = RandomCircle();
+                GO.transform.position = RandomAtDirection(1);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < spawnCount / 2; i++)
+            {
+                GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                //GO.transform.position = RandomCircle();
+                GO.transform.position = RandomAtDirection(2);
+            }
+
+            for (int i = 0; i < spawnCount / 2; i++)
+            {
+                GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                //GO.transform.position = RandomCircle();
+                GO.transform.position = RandomAtDirection(3);
+            }
         }
 
         remainingEnemies = spawnCount;
         waveOngoing = true;
 
-        waveMessage.text = "There are " + remainingEnemies + " Enemies Remaining";
+        waveMessage.text = remainingEnemies + " Enemies Remaining";
     }
 
     public void KilledEnemy()
@@ -102,7 +128,7 @@ public class EnemyManager : MonoBehaviour
 
             //UpdateTimerText();
         }
-        else waveMessage.text = "There are " + remainingEnemies + " Enemies Remaining";
+        else waveMessage.text = remainingEnemies + " Enemies Remaining";
     }
 
     void ResetValues()
@@ -160,7 +186,7 @@ public class EnemyManager : MonoBehaviour
                 delta.x = randomWidth;
                 break;
             case 3:
-                delta.z = -spawnDistanceFromBase + randomLength;
+                delta.z = spawnDistanceFromBase + randomLength;
                 delta.x = randomWidth;
                 break;
         }

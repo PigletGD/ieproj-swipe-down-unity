@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae60edfff091af44b9155258d04ade1, type: 3}
   m_Name: Wave Milestone 4
   m_EditorClassIdentifier: 
-  valueThreshold: 4000
+  valueThreshold: 3000
   milestoneType: {fileID: 11400000, guid: a4dc4c11bd5abe5498876492041063b7, type: 2}
