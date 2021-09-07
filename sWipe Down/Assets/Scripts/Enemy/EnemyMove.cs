@@ -13,7 +13,7 @@ public class EnemyMove : MonoBehaviour
     public List<Transform> targetList = null;
     public List<Transform> targetedList = null;
     public List<StatusEffect> statusEffectsList = new List<StatusEffect>();
-    [SerializeField]public Dictionary<StatusType, StatusParticleSystem> statusParticleSystemDictionary;
+    [SerializeField] public Dictionary<StatusType, StatusParticleSystem> statusParticleSystemDictionary;
 
     private float timeElapsed = 0f;
     [SerializeField] float attackRate = 0f;
@@ -88,6 +88,13 @@ public class EnemyMove : MonoBehaviour
 
         if (targetList.Count > 0) target = targetList[0];
         else target = baseBuilding;
+    }
+
+    public void AddForcedTarget(Transform foundTarget)
+    {
+        if (targetList.Count <= 0) target = foundTarget;
+
+        targetList.Insert(0, foundTarget);
     }
 
     public void RemoveTargetedList()

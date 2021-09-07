@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -94,6 +95,15 @@ public class GameManager : MonoBehaviour
             }
             else reached = false;
         } while (reached && tpMilestones.Count > 0);
+    }
+
+    [ContextMenu("Add Currency")]
+    public void AddCurrencyDebug()
+    {
+        Currency += 500;
+        TotalValue += 500;
+        moneyText.UpdateText(Currency);
+        onUpdateMoney.Raise();
     }
 
     [ContextMenu("Organize Total Value Milestones")]

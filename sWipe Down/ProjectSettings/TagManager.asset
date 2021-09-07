@@ -8,6 +8,7 @@ TagManager:
   - Vision
   - Base
   - Building
+  - Aroma
   layers:
   - Default
   - TransparentFX
