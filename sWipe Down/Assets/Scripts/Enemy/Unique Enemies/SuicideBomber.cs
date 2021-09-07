@@ -5,6 +5,7 @@ using UnityEngine;
 public class SuicideBomber : MonoBehaviour, IAttackHandler, IDeathHandler
 {
     [SerializeField] SphereCollider explosionRadius; // This is used to get range and also visualize the range
+    [SerializeField] GameObject explosionParticleSystem;
     public int damage;
 
     private void Start()
@@ -30,12 +31,15 @@ public class SuicideBomber : MonoBehaviour, IAttackHandler, IDeathHandler
 
     public void OnAttack()
     {
-        Explode();
         gameObject.GetComponent<HealthComponent>().TakeDamage(10000);
     }
 
     public void OnDeath()
     {
         Explode();
+        GameObject temp = Instantiate(explosionParticleSystem);
+        temp.transform.position = this.transform.position;
+        temp.transform.Translate(new Vector3(0.0f, 0.0f, 0.5f));
+        Destroy(temp, 2f);
     }
 }

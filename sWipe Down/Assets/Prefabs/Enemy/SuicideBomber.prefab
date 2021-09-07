@@ -88,7 +88,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 518990926395075290}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.05486238, y: 3.444054, z: 8.930969}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_Children:
   - {fileID: 6293897195004429643}
@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionRadius: {fileID: 6972888247606220870}
+  explosionParticleSystem: {fileID: 5732905523053947776, guid: 6850b2785a6083c4985b9bfbf6db5d67,
+    type: 3}
   damage: 1
 --- !u!1 &1423316638097352544
 GameObject:
