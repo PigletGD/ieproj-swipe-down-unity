@@ -19,6 +19,7 @@ public abstract class TowerBehaviour : MonoBehaviour
 
     protected float time = 0.0f;
     public float fireRate = 1.0f;
+    public float maxFireRate = 1.0f;
 
     public string key = "";
 
@@ -26,12 +27,17 @@ public abstract class TowerBehaviour : MonoBehaviour
 
     [SerializeField] private int towerValue = default;
 
+    public List<StatusEffect> statusEffectsList = new List<StatusEffect>();
+    [SerializeField] public Dictionary<StatusType, StatusParticleSystem> statusParticleSystemDictionary;
+
     void Start()
     {
         targetList = new List<Transform>();
         targetedList = new List<Transform>();
 
         manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+
+        statusParticleSystemDictionary = new Dictionary<StatusType, StatusParticleSystem>();
     }
 
     private void OnEnable()
@@ -48,6 +54,8 @@ public abstract class TowerBehaviour : MonoBehaviour
 
     public void ReadyAction()
     {
+        ApplyStatusEffects(Time.deltaTime);
+
         time += Time.deltaTime;
         if (!ReadyToExecuteAction()) return;
         ExecuteAction();
@@ -102,5 +110,59 @@ public abstract class TowerBehaviour : MonoBehaviour
     {
         normalModel.SetActive(true);
         transparentModel.SetActive(false);
+    }
+
+    public void AddStatusEffect(StatusEffect statusEffect)
+    {
+        if (statusEffect.durationType == Duration.LASTING)
+        {
+            bool found = false;
+
+            foreach (StatusEffect effect in statusEffectsList)
+            {
+                if (effect.statusType == statusEffect.statusType)
+                {
+                    effect.duration = statusEffect.duration;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                statusEffectsList.Add(statusEffect);
+                if (statusParticleSystemDictionary.ContainsKey(statusEffect.statusType) && statusParticleSystemDictionary[statusEffect.statusType] != null)
+                {
+                    statusParticleSystemDictionary[statusEffect.statusType].StatusUpdate(statusEffect);
+                }
+            }
+        }
+        else
+        {
+            statusEffectsList.Add(statusEffect);
+        }
+    }
+
+    private void ApplyStatusEffects(float deltaTime)
+    {
+        fireRate = maxFireRate;
+        for (int i = statusEffectsList.Count - 1; i >= 0; i--)
+        {
+            StatusEffect statusEffect = statusEffectsList[i];
+            statusEffect.ApplyEffect(this.gameObject);
+            if (statusEffect.durationType == Duration.INSTANTANEOUS)
+            {
+                statusEffectsList.RemoveAt(i);
+            }
+            else if (statusEffect.durationType == Duration.LASTING)
+            {
+                statusEffect.duration -= deltaTime;
+                if (statusEffect.duration <= 0)
+                {
+                    statusEffectsList.RemoveAt(i);
+
+                }
+            }
+        }
     }
 }

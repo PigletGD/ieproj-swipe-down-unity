@@ -230,7 +230,14 @@ public class EnemyManager : MonoBehaviour
     public void OrganizeWaves()
     {
         waves = waves.OrderBy(e => e.waveNumber).ToList();
-        
+
         Debug.Log("Finished Organizing Waves");
+    }
+
+    public void SpawnEnemy(int type, Vector3 position)
+    {
+        GameObject temp = enemyPools[type].GetObject();
+        temp.transform.position = position;
+        remainingEnemies++;
     }
 }

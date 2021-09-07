@@ -6,7 +6,7 @@ using UnityEngine;
 public class HealthComponent : MonoBehaviour
 {
     [SerializeField] int maxHealth = 0;
-    private int currentHealth = 0;
+    [SerializeField] int currentHealth = 0;
     [SerializeField]private int armor = 0;
     [SerializeField] bool isEnemy = false;
     [SerializeField] GameObject entity = null;
@@ -17,11 +17,18 @@ public class HealthComponent : MonoBehaviour
 
     [SerializeField] VoidEvent onEnemyKilled = null;
 
+    [SerializeField] List<IDeathHandler> deathHandlerList;
+
+    private void Awake()
+    {
+        deathHandlerList = new List<IDeathHandler>();
+    }
+
     // Start is called before the first frame update
     void OnEnable()
     {
         deadAlready = false;
-        currentHealth = maxHealth;
+       // currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
 
@@ -34,6 +41,7 @@ public class HealthComponent : MonoBehaviour
         {
             currentHealth = 0;
             Die();
+            OnDeath();
             deadAlready = true;
         }
     }
@@ -65,8 +73,8 @@ public class HealthComponent : MonoBehaviour
         {
             TB.ReduceTotalValue();
             BuildingManager.instance.RemoveBuildingFromDictionary(TB.key);
-        } 
-            
+        }
+
 
         PooledObject pooled = gameObject.GetComponent<PooledObject>();
         if (pooled != null) pooled.ReturnObject();
@@ -82,6 +90,36 @@ public class HealthComponent : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnDeath()
+    {
+        if (deathHandlerList != null)
+        {
+            foreach (IDeathHandler listener in deathHandlerList)
+            {
+                listener.OnDeath();
+            }
+        }
+    }
+
     public int MaxHealth => maxHealth;
     public int CurrentHealth => currentHealth;
+
+    public void AddDeathHandler(IDeathHandler handler)
+    {
+        deathHandlerList.Add(handler);
+    }
+
+    public void RemoveDeathHandler(IDeathHandler handler)
+    {
+        deathHandlerList.Remove(handler);
+    }
+
+    public void heal(int heal)
+    {
+        currentHealth += heal;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+    }
 }
