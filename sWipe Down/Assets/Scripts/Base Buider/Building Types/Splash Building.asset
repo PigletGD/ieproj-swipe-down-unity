@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da649f1567182834aabab8c6b575b61b, type: 3}
   m_Name: Splash Building
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 0}
-  buildingCost: 0
+  buildingPrefab: {fileID: 7800365577940988191, guid: a9931e21d20300448a52ba408750ba2e,
+    type: 3}
+  buildingCost: 15
   buildingIcon: {fileID: 0}
-  initialPoolSize: 0
+  initialPoolSize: 10
