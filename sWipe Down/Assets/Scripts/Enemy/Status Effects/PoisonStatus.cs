@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class PoisonStatus : StatusEffect
 {
-    public PoisonStatus(float dur)
+    int damage = 0;
+    float currentTick = 0.0f;
+
+    public PoisonStatus(int damageValue, float dur)
     {
+        damage = damageValue;
         duration = dur;
         durationType = Duration.LASTING;
-        this.statusType = StatusType.Slow;
+        statusType = StatusType.Poison;
     }
 
     public override void ApplyEffect(GameObject enemy)
     {
-        HealthComponent healthComponent = enemy.GetComponentInChildren<HealthComponent>();
-        
-        if (healthComponent != null)
+        currentTick += Time.deltaTime;
+
+        if (currentTick > 1.0f)
         {
-            //healthComponent.TakeDamage(1);
-            Debug.Log("Take Damage");
+            HealthComponent healthComponent = enemy.GetComponentInChildren<HealthComponent>();
+
+            if (healthComponent != null)
+            {
+                healthComponent.TakeDamage(damage);
+            }
+
+            currentTick -= 1.0f;
         }
     }
 }

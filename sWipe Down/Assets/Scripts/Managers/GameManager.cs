@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     [ContextMenuItem("Organize TP Milestones", "OrganizeCurrentTPMilestones")]
     [SerializeField] List<MilestoneSO> tpMilestones = default;
 
+    [SerializeField] GameObject pauseMenu = default;
+
     private float tick = 0;
 
     // Start is called before the first frame update
@@ -95,6 +97,23 @@ public class GameManager : MonoBehaviour
             }
             else reached = false;
         } while (reached && tpMilestones.Count > 0);
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        pauseMenu.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        pauseMenu.SetActive(false);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     [ContextMenu("Add Currency")]
