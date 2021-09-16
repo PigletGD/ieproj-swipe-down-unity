@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 80892b46a6989f749b72b2d7c8b18912
+guid: 1fb63f34bede33342bd5f74692e2f768
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: poop_colormap
+    second: {fileID: 2800000, guid: 8b1714ad4b891f64cbca341d62b20798, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: poopeye_colormap
+    second: {fileID: 2800000, guid: 30e02217d655dd84f937052afe945b3d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: pooptongue_colormap
+    second: {fileID: 2800000, guid: 27b1b6bf4984b654e8ea2bb119add8fa, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
