@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: f142f3c594da75d4e96bbdb31d4b6178
+guid: dde815828e6a64a4e8ce29dab04d80ca
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Blue_Sponge
+    second: {fileID: 2800000, guid: a29f3793763cfdf47962a7fdf8115523, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
