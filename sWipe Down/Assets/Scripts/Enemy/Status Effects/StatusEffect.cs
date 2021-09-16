@@ -12,7 +12,8 @@ public enum Duration
 public enum StatusType
 { 
     Slow = 0,
-    Restrain = 1
+    Restrain = 1,
+    Poison = 2
 }
 
 public abstract class StatusEffect

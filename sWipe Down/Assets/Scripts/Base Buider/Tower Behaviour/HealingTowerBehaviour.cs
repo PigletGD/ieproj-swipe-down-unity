@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class HealingTowerBehaviour : TowerBehaviour
 {
-    [SerializeField] private SphereCollider collider;
+    [SerializeField] private SphereCollider sphereCollider;
     private int healValue = 1;
     public override void ExecuteAction()
     {
-        Collider[] colliders = Physics.OverlapSphere(gameObject.transform.position, collider.radius);
+        Collider[] colliders = Physics.OverlapSphere(gameObject.transform.position, sphereCollider.radius);
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject.tag == "Building")

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<MilestoneSO> milestones = default;
     [ContextMenuItem("Organize TP Milestones", "OrganizeCurrentTPMilestones")]
     [SerializeField] List<MilestoneSO> tpMilestones = default;
+
+    [SerializeField] GameObject pauseMenu = default;
 
     private float tick = 0;
 
@@ -94,6 +97,32 @@ public class GameManager : MonoBehaviour
             }
             else reached = false;
         } while (reached && tpMilestones.Count > 0);
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        pauseMenu.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        pauseMenu.SetActive(false);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    [ContextMenu("Add Currency")]
+    public void AddCurrencyDebug()
+    {
+        Currency += 500;
+        TotalValue += 500;
+        moneyText.UpdateText(Currency);
+        onUpdateMoney.Raise();
     }
 
     [ContextMenu("Organize Total Value Milestones")]
