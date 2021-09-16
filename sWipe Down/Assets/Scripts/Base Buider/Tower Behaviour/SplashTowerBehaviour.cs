@@ -5,6 +5,7 @@ using UnityEngine;
 public class SplashTowerBehaviour : TowerBehaviour
 {
     [SerializeField] private SphereCollider splashCollider = default;
+    [SerializeField] private ParticleSystem particleSystem;
 
     public override void ExecuteAction()
     {
@@ -21,6 +22,11 @@ public class SplashTowerBehaviour : TowerBehaviour
                 }
             }
         }
+        if (particleSystem != null)
+        {
+            particleSystem.Play();
+        }
+
         Debug.Log("Explode");
     }
 

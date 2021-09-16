@@ -37,6 +37,11 @@ public class SuicideBomber : MonoBehaviour, IAttackHandler, IDeathHandler
     public void OnDeath()
     {
         Explode();
+        if (explosionParticleSystem == null)
+        {
+            Debug.LogWarning("No explosion particle");
+            return;
+        }    
         GameObject temp = Instantiate(explosionParticleSystem);
         temp.transform.position = this.transform.position;
         temp.transform.Translate(new Vector3(0.0f, 0.0f, 0.5f));
