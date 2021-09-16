@@ -38,6 +38,12 @@ public abstract class TowerBehaviour : MonoBehaviour
         manager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
 
         statusParticleSystemDictionary = new Dictionary<StatusType, StatusParticleSystem>();
+
+        StatusParticleSystem[] spsList = this.gameObject.GetComponentsInChildren<StatusParticleSystem>();
+        foreach (StatusParticleSystem sps in spsList)
+        {
+            statusParticleSystemDictionary[sps.statusType] = sps;
+        }
     }
 
     private void OnEnable()
