@@ -161,6 +161,18 @@ public class EnemyManager : MonoBehaviour
         return pos;
     }
 
+    Vector3 RandomCircle(float radius)
+    {
+        float angle = Random.value * 360;
+        Vector3 pos = Vector3.zero;
+
+        pos.x = radius * Mathf.Sin(angle * Mathf.Deg2Rad);
+        pos.y = 0f;
+        pos.z = radius * Mathf.Cos(angle * Mathf.Deg2Rad);
+
+        return pos;
+    }
+
     Vector3 RandomAtDirection(int direction)
     {
         Vector3 pos = new Vector3(0.5f, 0.0f, 0.5f);
@@ -238,6 +250,13 @@ public class EnemyManager : MonoBehaviour
     {
         GameObject temp = enemyPools[type].GetObject();
         temp.transform.position = position;
+        remainingEnemies++;
+    }
+
+    public void SpawnEnemy(int type, Vector3 position, float radius)
+    {
+        GameObject temp = enemyPools[type].GetObject();
+        temp.transform.position = position + RandomCircle(radius);
         remainingEnemies++;
     }
 }

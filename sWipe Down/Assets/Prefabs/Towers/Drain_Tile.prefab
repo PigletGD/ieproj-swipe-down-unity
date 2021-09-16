@@ -111,10 +111,8 @@ MonoBehaviour:
   targetedList: []
   normalModel: {fileID: 3752752453905335186}
   transparentModel: {fileID: 6757640777187496075}
-  MR: {fileID: 0}
-  transparent: {fileID: 2100000, guid: 7520440b1af98d54999b9e0a6ce69af4, type: 2}
-  normal: {fileID: 2100000, guid: f9741156eb264c34cbd24cc970e9cb8c, type: 2}
   fireRate: 1
+  maxFireRate: 1
   key: 
   towerValue: 0
 --- !u!1 &3752752453905335186
@@ -257,7 +255,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7520440b1af98d54999b9e0a6ce69af4, type: 2}
+  - {fileID: 2100000, guid: 8df3172a7cda4df4db60573e60532659, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

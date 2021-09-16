@@ -18,7 +18,7 @@ public class Split : MonoBehaviour, IDeathHandler
         {
             for (int i = 0; i < offspringCount; i++)
             {
-                manager.GetComponent<EnemyManager>().SpawnEnemy(0, this.transform.position);
+                manager.GetComponent<EnemyManager>().SpawnEnemy(0, transform.position, 1);
             }
         }
     }

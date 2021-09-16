@@ -6,7 +6,7 @@ using UnityEngine;
 public class HealthComponent : MonoBehaviour
 {
     [SerializeField] int maxHealth = 0;
-    private int currentHealth = 0;
+    int currentHealth = 0;
     [SerializeField]private int armor = 0;
     [SerializeField] bool isEnemy = false;
     [SerializeField] GameObject entity = null;
@@ -40,9 +40,8 @@ public class HealthComponent : MonoBehaviour
         if (currentHealth <= 0 && !deadAlready)
         {
             currentHealth = 0;
-            Die();
-            Debug.Log("Dead");
             OnDeath();
+            Die();
             deadAlready = true;
         }
     }

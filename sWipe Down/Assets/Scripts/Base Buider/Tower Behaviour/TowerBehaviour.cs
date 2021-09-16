@@ -13,9 +13,9 @@ public abstract class TowerBehaviour : MonoBehaviour
     [SerializeField] private GameObject normalModel = default;
     [SerializeField] private GameObject transparentModel = default;
 
-    [SerializeField] private MeshRenderer MR = default;
-    [SerializeField] private Material transparent = default;
-    [SerializeField] private Material normal = default;
+    //[SerializeField] private MeshRenderer MR = default;
+    //[SerializeField] private Material transparent = default;
+    //[SerializeField] private Material normal = default;
 
     protected float time = 0.0f;
     public float fireRate = 1.0f;

@@ -95,6 +95,13 @@ public class EnemyMove : MonoBehaviour
         else target = baseBuilding;
     }
 
+    public void AddForcedTarget(Transform foundTarget)
+    {
+        if (targetList.Count <= 0) target = foundTarget;
+
+        targetList.Insert(0, foundTarget);
+    }
+
     public void RemoveTargetedList()
     {
         foreach (Transform targeted in targetedList)
