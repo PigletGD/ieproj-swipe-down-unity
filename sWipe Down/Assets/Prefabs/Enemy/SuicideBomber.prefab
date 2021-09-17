@@ -935,7 +935,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a289549e05cd3d14ea0ca2dc46e2bfd6, type: 2}
+  - {fileID: 2100000, guid: 3763d68981c9a354e8e43b865ae46bf4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1327,6 +1327,21 @@ PrefabInstance:
     - target: {fileID: 5732905523053947806, guid: 6850b2785a6083c4985b9bfbf6db5d67,
         type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732905523053947806, guid: 6850b2785a6083c4985b9bfbf6db5d67,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.80404997
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732905523053947806, guid: 6850b2785a6083c4985b9bfbf6db5d67,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732905523053947806, guid: 6850b2785a6083c4985b9bfbf6db5d67,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5732905523053947806, guid: 6850b2785a6083c4985b9bfbf6db5d67,
