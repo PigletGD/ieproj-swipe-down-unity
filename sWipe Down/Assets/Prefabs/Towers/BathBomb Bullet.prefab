@@ -62,7 +62,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 6271573414225017425, guid: a618805065298c248afe5017420f78fd, type: 3}
-  - {fileID: 2100000, guid: d729bdcd7e909ac47863c2fddd485377, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,3 +112,5 @@ MonoBehaviour:
   power: 10
   radius: 2
   upforce: 1
+  particleSystem: {fileID: 5050140525376142875, guid: 8dd472c6f7ddf164eb64bd97812e35b2,
+    type: 3}

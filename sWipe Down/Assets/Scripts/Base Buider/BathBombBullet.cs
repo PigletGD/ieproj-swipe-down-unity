@@ -8,6 +8,8 @@ public class BathBombBullet : MonoBehaviour
     public float radius = 2.0f;
     public float upforce = 1.0f;
 
+    [SerializeField]GameObject particleSystem;
+
     private void Start()
     {
         StartCoroutine("Die");
@@ -38,10 +40,18 @@ public class BathBombBullet : MonoBehaviour
             {
                 collider.gameObject.GetComponent<HealthComponent>().TakeDamage(5);
                 Rigidbody rb = collider.GetComponent<Rigidbody>();
-                if(rb != null)
+                if (rb != null)
                     rb.AddExplosionForce(power, explosionPosition, radius, upforce, ForceMode.Impulse);
             }
         }
+
+        if (particleSystem != null)
+        {
+            GameObject temp = Instantiate(particleSystem);
+            temp.transform.position = gameObject.transform.position;
+            Destroy(temp, 2);
+        }
+       
     }
 
     IEnumerator Die()

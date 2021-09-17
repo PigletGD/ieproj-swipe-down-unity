@@ -22,5 +22,9 @@ public class StatusParticleSystem : MonoBehaviour
         elapsedTime = 0.0f;
         
         this.gameObject.SetActive(true);
+
+        ParticleSystem particleSystem = GetComponent<ParticleSystem>();
+        particleSystem.Stop();
+        particleSystem.Play();
     }
 }
