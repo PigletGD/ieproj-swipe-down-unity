@@ -35,6 +35,7 @@ public class HealthComponent : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= (damage-armor);
+        healthBar.SetImageEnable(true);
         healthBar.SetHealth(currentHealth);
 
         if (currentHealth <= 0 && !deadAlready)
@@ -57,11 +58,14 @@ public class HealthComponent : MonoBehaviour
                 entity.GetComponent<TowerBehaviour>().RemoveTargetedList();
             }
             else { entity.GetComponent<GoToEndScreen>().SwitchScene(); return; }
-            
+
+            AudioManager.instance.Play("TowerDestroy");
         }
         else
         {
             entity.GetComponent<EnemyMove>().RemoveTargetedList();
+
+            AudioManager.instance.Play("ScatDeath");
 
             onEnemyKilled.Raise();
         }
@@ -120,6 +124,10 @@ public class HealthComponent : MonoBehaviour
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
+
+            healthBar.SetImageEnable(false);
         }
+
+        healthBar.SetHealth(currentHealth);
     }
 }

@@ -25,7 +25,7 @@ public class bulletmovement : MonoBehaviour
 
     IEnumerator Die()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
         Destroy(gameObject);
     }

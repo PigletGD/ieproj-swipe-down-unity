@@ -20,6 +20,8 @@ public class TestScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     private bool isScrolling = false;
 
+    public float dragThreshold = -40.0f;
+
     private void Awake()
     {
         camMain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -28,6 +30,8 @@ public class TestScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     private void Update()
     {
+        Application.targetFrameRate = 60;
+
         if (holdingTP)
         {
             initialClickPos = currentClickPos;
@@ -35,6 +39,8 @@ public class TestScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         }
 
         //if (Input.GetKeyDown(KeyCode.K)) AddAutoScrollMultiplier(2);
+
+        if (Time.timeScale <= 0.01f) return;
 
         CheckScroll();
 
@@ -85,7 +91,12 @@ public class TestScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     public void UpdateScrollSpeed()
     {
-        if (holdingTP) ScrollSpeed = (currentClickPos.y - initialClickPos.y) * 100;
+        if (holdingTP) {
+            float strength = (currentClickPos.y - initialClickPos.y) * 100;
+
+            if (strength > dragThreshold) ScrollSpeed = (strength / dragThreshold) * setScrollSpeed * 1.25f;
+            else ScrollSpeed = setScrollSpeed * 1.25f;
+        }
         else ScrollSpeed *= 0.95f;
 
         if (!isScrolling && autoScrollSpeed != 0)
@@ -95,7 +106,7 @@ public class TestScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
             else ScrollSpeed = autoScrollSpeed;
         }
 
-        if (ScrollSpeed < -100f) ScrollSpeed = -100f;
+        if (ScrollSpeed < -300f) ScrollSpeed = -300f;
         else if (ScrollSpeed > 0.5f) ScrollSpeed = 0.5f;
     }
 

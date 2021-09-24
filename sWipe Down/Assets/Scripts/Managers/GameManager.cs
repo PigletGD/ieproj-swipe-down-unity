@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
 
     private float tick = 0;
 
-    // Start is called before the first frame update
     private void Start()
     {
         Currency = 0;
@@ -35,7 +34,6 @@ public class GameManager : MonoBehaviour
         if (tick > 0.25f)
         {
             CheckForReachedMilestones();
-            CheckForReachedTPMilestones();
 
             tick = 0.0f;
         }
@@ -47,8 +45,6 @@ public class GameManager : MonoBehaviour
         TotalValue += value;
         moneyText.UpdateText(Currency);
         onUpdateMoney.Raise();
-
-        AudioManager.instance.Play("Tissue");
     }
 
     public void SpendCurrency(int value)
@@ -140,4 +136,8 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Finished Organizing TP Milestones");
     }
+
+    public void StopTime() => Time.timeScale = 0.0f;
+
+    public void StartTime() => Time.timeScale = 1.0f;
 }

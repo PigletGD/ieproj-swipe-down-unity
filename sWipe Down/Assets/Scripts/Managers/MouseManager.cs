@@ -23,7 +23,7 @@ public class MouseManager : MonoBehaviour
     [SerializeField] int zoomMin = 0;
     [SerializeField] int zoomMax = 0;
 
-    Vector3 newPosition = Vector3.zero;
+    public Vector3 newPosition = Vector3.zero;
     Vector3 dragStartPosition = Vector3.zero;
     Vector3 dragCurrentPosition = Vector3.zero;
     int zoomAmount = 0;
@@ -182,9 +182,7 @@ public class MouseManager : MonoBehaviour
         else
         {
             cameraRig.position = Vector3.Lerp(cameraRig.position, newPosition, Time.deltaTime * cameraMovementTime * 0.5f);
-        }
-
-        
+        }       
     }
 
     private void MobileControls()

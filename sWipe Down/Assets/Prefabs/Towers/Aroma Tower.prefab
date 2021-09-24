@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3c2a77a491f2446ab4c26121487d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 12
+  maxHealth: 8
   armor: 0
   isEnemy: 0
   entity: {fileID: 3725297111629228292}
@@ -240,6 +240,7 @@ MonoBehaviour:
   maxFireRate: 1
   key: 
   towerValue: 0
+  isAroma: 1
 --- !u!1 &4888889412195980101
 GameObject:
   m_ObjectHideFlags: 0

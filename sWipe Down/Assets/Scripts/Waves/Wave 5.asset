@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Wave 5
   m_EditorClassIdentifier: 
   waveNumber: 5
-  enemyTypes: 000000000000000001000000010000000200000003000000
-  spawnNumber: 26
-  initialMinTimer: 25
+  enemyTypes: 0000000000000000010000000200000003000000
+  spawnNumber: 30
+  initialMinTimer: 30
   initialMaxTimer: 30
+  spawnDirections: 3

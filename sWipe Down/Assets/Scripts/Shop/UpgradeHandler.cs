@@ -10,10 +10,11 @@ public class UpgradeHandler : MonoBehaviour
     [ContextMenuItem("Organize Upgrades", "OrganizeUpgrades")]
     [SerializeField] List<GameObject> buttons = new List<GameObject>();
 
-    public void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.J))
-            PlaceUpgradeInMenu();
+        PlaceUpgradeInMenu();
+        PlaceUpgradeInMenu();
+        PlaceUpgradeInMenu();
     }
 
     public void PlaceUpgradeInMenu()

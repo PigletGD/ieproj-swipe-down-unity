@@ -363,8 +363,8 @@ MonoBehaviour:
   targetedList: []
   normalModel: {fileID: 3460618127491944535}
   transparentModel: {fileID: 5144244789150488342}
-  fireRate: 0.25
-  maxFireRate: 0.25
+  fireRate: 1
+  maxFireRate: 1
   key: 
   towerValue: 0
   bullet: {fileID: 1189224412852221907, guid: 61d55826538950944b0d403de345b935, type: 3}

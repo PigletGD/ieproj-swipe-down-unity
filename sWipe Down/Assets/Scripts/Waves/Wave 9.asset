@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 119cbe489986dc346ac5c464e49bc70d, type: 3}
-  m_Name: Sniper Tower
+  m_Script: {fileID: 11500000, guid: e4418eeafa8c4234eb9838cfab96367a, type: 3}
+  m_Name: Wave 9
   m_EditorClassIdentifier: 
-  health: 3
-  fireRate: 3
-  actionValue: 3
+  waveNumber: 8
+  enemyTypes: 0000000000000000020000000300000006000000
+  spawnNumber: 38
+  initialMinTimer: 30
+  initialMaxTimer: 30
+  spawnDirections: 4

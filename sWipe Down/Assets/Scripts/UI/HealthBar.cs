@@ -19,7 +19,7 @@ public class HealthBar : MonoBehaviour
     {
         StopAllCoroutines();
 
-        SetImageEnable(true);
+        //SetImageEnable(true);
 
         StartCoroutine(SlideHealth(health));
     }
@@ -33,7 +33,7 @@ public class HealthBar : MonoBehaviour
 
     IEnumerator SlideHealth(int health)
     {
-        while (slider.value > health)
+        while (slider.value != health)
         {
             float newVal = Mathf.Lerp(slider.value, (float)health, 0.1f);
 
@@ -46,7 +46,7 @@ public class HealthBar : MonoBehaviour
         }
     }
 
-    private void SetImageEnable(bool value)
+    public void SetImageEnable(bool value)
     {
         fill.gameObject.SetActive(value);
         background.gameObject.SetActive(value);

@@ -36,6 +36,21 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float spawnWidth;
     [SerializeField] private float spawnLength;
 
+    [SerializeField] private GameObject topArrow = default;
+    [SerializeField] private GameObject bottomArrow = default;
+    [SerializeField] private GameObject rightArrow = default;
+    [SerializeField] private GameObject leftArrow = default;
+
+    [SerializeField] private Material arrow = default;
+
+    [SerializeField] private VoidEvent buildingUnlock = default;
+
+    [SerializeField] private GameObject winningPanel = default;
+
+    private bool mainGameWon = false;
+
+    private int spawnDirection = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,11 +83,94 @@ public class EnemyManager : MonoBehaviour
     {
         sliderAnimator.SetTrigger("WaveStart");
 
+        switch (spawnDirection)
+        {
+            case 1:
+                SpawnOneDirection();
+                break;
+            case 2:
+                SpawnTwoDirection();
+                break;
+            case 3:
+                SpawnThreeDirection();
+                break;
+            case 4:
+                SpawnFourDirection();
+                break;
+            default:
+                SpawnTwoDirection();
+                break;
+        }
+
+        remainingEnemies = spawnCount;
+        waveOngoing = true;
+
+        waveMessage.text = remainingEnemies + " Enemies Remaining";
+
+        StartCoroutine("WarningAnimation");
+    }
+
+    private void SpawnOneDirection()
+    {
+        int direction = Random.Range(0, 4);
+
+        GameObject GO;
+        if (direction == 0)
+        {
+            leftArrow.SetActive(true);
+
+            for (int i = 0; i < spawnCount; i++)
+            {
+                GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                //GO.transform.position = RandomCircle();
+                GO.transform.position = RandomAtDirection(0);
+            }
+        }
+        else if (direction == 1)
+        {
+            rightArrow.SetActive(true);
+
+            for (int i = 0; i < spawnCount; i++)
+            {
+                GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                //GO.transform.position = RandomCircle();
+                GO.transform.position = RandomAtDirection(1);
+            }
+        }
+        else if (direction == 2)
+        {
+            bottomArrow.SetActive(true);
+
+            for (int i = 0; i < spawnCount; i++)
+            {
+                GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                //GO.transform.position = RandomCircle();
+                GO.transform.position = RandomAtDirection(2);
+            }
+        }
+        else
+        {
+            topArrow.SetActive(true);
+
+            for (int i = 0; i < spawnCount; i++)
+            {
+                GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                //GO.transform.position = RandomCircle();
+                GO.transform.position = RandomAtDirection(3);
+            }
+        }
+    }
+
+    private void SpawnTwoDirection()
+    {
         int direction = Random.Range(0, 4);
 
         GameObject GO;
         if (direction <= 1)
         {
+            rightArrow.SetActive(true);
+            leftArrow.SetActive(true);
+
             for (int i = 0; i < spawnCount / 2; i++)
             {
                 GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
@@ -80,7 +178,7 @@ public class EnemyManager : MonoBehaviour
                 GO.transform.position = RandomAtDirection(0);
             }
 
-            for (int i = 0; i < spawnCount / 2; i++)
+            for (int i = 0; i < (spawnCount / 2) + (spawnCount % 2); i++)
             {
                 GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
                 //GO.transform.position = RandomCircle();
@@ -89,6 +187,9 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
+            topArrow.SetActive(true);
+            bottomArrow.SetActive(true);
+
             for (int i = 0; i < spawnCount / 2; i++)
             {
                 GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
@@ -96,18 +197,192 @@ public class EnemyManager : MonoBehaviour
                 GO.transform.position = RandomAtDirection(2);
             }
 
-            for (int i = 0; i < spawnCount / 2; i++)
+            for (int i = 0; i < (spawnCount / 2) + (spawnCount % 2); i++)
             {
                 GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
                 //GO.transform.position = RandomCircle();
                 GO.transform.position = RandomAtDirection(3);
             }
         }
+    }
 
-        remainingEnemies = spawnCount;
-        waveOngoing = true;
+    private void SpawnThreeDirection()
+    {
+        int direction = Random.Range(0, 4);
 
-        waveMessage.text = remainingEnemies + " Enemies Remaining";
+        int remainder = spawnCount % 3;
+        int addend = 0;
+
+        GameObject GO;
+        if (direction <= 1)
+        {
+            rightArrow.SetActive(true);
+            leftArrow.SetActive(true);
+
+            for (int i = 0; i < spawnCount / 3; i++)
+            {
+                GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                //GO.transform.position = RandomCircle();
+                GO.transform.position = RandomAtDirection(0);
+            }
+
+            if (remainder > 0)
+            {
+                addend = 1;
+                remainder -= 1;
+            }
+            else addend = 0;
+
+            for (int i = 0; i < (spawnCount / 3) + addend; i++)
+            {
+                GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                //GO.transform.position = RandomCircle();
+                GO.transform.position = RandomAtDirection(1);
+            }
+
+            direction = Random.Range(0, 1);
+
+            if (remainder > 0)
+                addend = 1;
+            else addend = 0;
+
+            if (direction == 0)
+            {
+                bottomArrow.SetActive(true);
+
+                for (int i = 0; i < (spawnCount / 3) + addend; i++)
+                {
+                    GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                    //GO.transform.position = RandomCircle();
+                    GO.transform.position = RandomAtDirection(2);
+                }
+            }
+            else
+            {
+                topArrow.SetActive(true);
+
+                for (int i = 0; i < (spawnCount / 3) + addend; i++)
+                {
+                    GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                    //GO.transform.position = RandomCircle();
+                    GO.transform.position = RandomAtDirection(3);
+                }
+            }
+        }
+        else
+        {
+            topArrow.SetActive(true);
+            bottomArrow.SetActive(true);
+
+            for (int i = 0; i < spawnCount / 3; i++)
+            {
+                GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                //GO.transform.position = RandomCircle();
+                GO.transform.position = RandomAtDirection(2);
+            }
+
+            if (remainder > 0)
+            {
+                addend = 1;
+                remainder -= 1;
+            }
+            else addend = 0;
+
+            for (int i = 0; i < (spawnCount / 3) + addend; i++)
+            {
+                GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                //GO.transform.position = RandomCircle();
+                GO.transform.position = RandomAtDirection(3);
+            }
+
+            direction = Random.Range(0, 1);
+
+            if (remainder > 0)
+                addend = 1;
+            else addend = 0;
+
+            if (direction == 0)
+            {
+                leftArrow.SetActive(true);
+
+                for (int i = 0; i < (spawnCount / 3) + addend; i++)
+                {
+                    GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                    //GO.transform.position = RandomCircle();
+                    GO.transform.position = RandomAtDirection(0);
+                }
+            }
+            else
+            {
+                rightArrow.SetActive(true);
+
+                for (int i = 0; i < (spawnCount / 3) + addend; i++)
+                {
+                    GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+                    //GO.transform.position = RandomCircle();
+                    GO.transform.position = RandomAtDirection(1);
+                }
+            }
+        }
+    }
+
+    private void SpawnFourDirection()
+    {
+        rightArrow.SetActive(true);
+        leftArrow.SetActive(true);
+        topArrow.SetActive(true);
+        bottomArrow.SetActive(true);
+
+        GameObject GO;
+
+        int remainder = spawnCount % 4;
+        int addend = 0;
+
+        for (int i = 0; i < spawnCount / 4; i++)
+        {
+            GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+            //GO.transform.position = RandomCircle();
+            GO.transform.position = RandomAtDirection(0);
+        }
+
+        if (remainder > 0)
+        {
+            addend = 1;
+            remainder -= 1;
+        }
+        else addend = 0;
+
+        for (int i = 0; i < (spawnCount / 4) + addend; i++)
+        {
+            GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+            //GO.transform.position = RandomCircle();
+            GO.transform.position = RandomAtDirection(1);
+        }
+
+        if (remainder > 0)
+        {
+            addend = 1;
+            remainder -= 1;
+        }
+        else addend = 0;
+
+        for (int i = 0; i < (spawnCount / 4) + addend; i++)
+        {
+            GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+            //GO.transform.position = RandomCircle();
+            GO.transform.position = RandomAtDirection(2);
+        }
+
+        if (remainder > 0)
+            addend = 1;
+        else addend = 0;
+
+        for (int i = 0; i < (spawnCount / 4) + addend; i++)
+        {
+            GO = enemyPools[enemyType[Random.Range(0, enemyType.Count)]].GetObject();
+            //GO.transform.position = RandomCircle();
+            GO.transform.position = RandomAtDirection(3);
+        }
     }
 
     public void KilledEnemy()
@@ -118,15 +393,17 @@ public class EnemyManager : MonoBehaviour
         {
             waveOngoing = false;
 
-            currentTimerForNextSpawn = 0;
+            /*currentTimerForNextSpawn = 0;
             timerForNextSpawn = Random.Range(minTimer, maxTimer);
 
             waveSlider.minValue = 0;
-            waveSlider.maxValue = timerForNextSpawn;
+            waveSlider.maxValue = timerForNextSpawn;*/
 
             sliderAnimator.SetTrigger("WaveEnd");
 
-            //UpdateTimerText();
+            AdvanceToNextWave();
+
+            buildingUnlock.Raise();
         }
         else waveMessage.text = remainingEnemies + " Enemies Remaining";
     }
@@ -208,34 +485,65 @@ public class EnemyManager : MonoBehaviour
 
     public void AdvanceToNextWave()
     {
-        if (waves.Count <= 0) return;
-
-        waveSlider.gameObject.SetActive(true);
-
-        spawnCount = waves[0].spawnNumber;
-
-        minTimer = waves[0].initialMinTimer;
-        maxTimer = waves[0].initialMaxTimer;
-
-        enemyType.Clear();
-
-        for (int i = 0; i < waves[0].enemyTypes.Length; i++)
-            enemyType.Add(waves[0].enemyTypes[i]);
-
-        waves.RemoveAt(0);
-
-        if (!startEnemyWaveSpawning)
+        if (waves.Count > 1)
         {
+            if (startEnemyWaveSpawning) waves.RemoveAt(0);
+            else startEnemyWaveSpawning = true;
+
+            waveSlider.gameObject.SetActive(true);
+
+            spawnCount = waves[0].spawnNumber;
+
+            minTimer = waves[0].initialMinTimer;
+            maxTimer = waves[0].initialMaxTimer;
+
+            enemyType.Clear();
+
+            spawnDirection = waves[0].spawnDirections;
+
+            for (int i = 0; i < waves[0].enemyTypes.Length; i++)
+                enemyType.Add(waves[0].enemyTypes[i]);
+
+            currentTimerForNextSpawn = 0;
             timerForNextSpawn = Random.Range(minTimer, maxTimer);
             timerInteger = (int)timerForNextSpawn - 1;
 
             waveSlider.minValue = 0;
             waveSlider.maxValue = timerForNextSpawn;
-
-            startEnemyWaveSpawning = true;
         }
+        else
+        {
+            if (!mainGameWon)
+            {
+                mainGameWon = true;
 
-        //UpdateTimerText();
+                winningPanel.SetActive(true);
+
+                Time.timeScale = 0;
+
+                spawnCount = 50;
+
+                minTimer = 15;
+                maxTimer = 15;
+
+                enemyType.Clear();
+
+                for (int i = 0; i < 7; i++)
+                    enemyType.Add(i);
+
+                spawnDirection = 4;
+            }
+            else spawnCount += 5;
+
+            waveSlider.gameObject.SetActive(true);
+
+            currentTimerForNextSpawn = 0;
+            timerForNextSpawn = Random.Range(minTimer, maxTimer);
+            timerInteger = (int)timerForNextSpawn - 1;
+
+            waveSlider.minValue = 0;
+            waveSlider.maxValue = timerForNextSpawn;
+        }
     }
 
     [ContextMenu("Organize Waves")]
@@ -258,5 +566,43 @@ public class EnemyManager : MonoBehaviour
         GameObject temp = enemyPools[type].GetObject();
         temp.transform.position = position + RandomCircle(radius);
         remainingEnemies++;
+    }
+
+    IEnumerator WarningAnimation()
+    {
+        float currentTicks = 0;
+        float flashTime = 0.5f;
+
+        for(int i = 0; i < 3; i++)
+        {
+            while (currentTicks < flashTime)
+            {
+                currentTicks += Time.deltaTime;
+
+                if (currentTicks > flashTime) currentTicks = flashTime;
+
+                arrow.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, currentTicks / flashTime));
+
+                yield return null;
+            }
+
+            while (currentTicks > 0)
+            {
+                currentTicks -= Time.deltaTime;
+
+                if (currentTicks < 0) currentTicks = 0;
+
+                arrow.color = new Color(1, 1, 1, Mathf.Lerp(0, 1, currentTicks / flashTime));
+
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(0.25f);
+        }
+
+        topArrow.SetActive(false);
+        bottomArrow.SetActive(false);
+        rightArrow.SetActive(false);
+        leftArrow.SetActive(false);
     }
 }

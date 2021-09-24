@@ -62,7 +62,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 6271573414225017425, guid: a618805065298c248afe5017420f78fd, type: 3}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69596ce2c6b5d7d489a6612e81831644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 10
-  radius: 2
+  power: 8
+  radius: 3
   upforce: 1
   particleSystem: {fileID: 5050140525376142875, guid: 8dd472c6f7ddf164eb64bd97812e35b2,
     type: 3}

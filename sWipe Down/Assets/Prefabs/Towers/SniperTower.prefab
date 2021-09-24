@@ -515,9 +515,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8090885800379344564}
   - component: {fileID: 5412185275320887235}
+  - component: {fileID: 5716699300740343351}
+  - component: {fileID: 8039999373041038344}
   m_Layer: 0
   m_Name: SniperTower
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -563,9 +565,40 @@ MonoBehaviour:
   fireRate: 3
   maxFireRate: 1
   key: 
-  towerValue: 0
+  towerValue: 2
   bullet: {fileID: 7892922164849568831, guid: 5f634928279d0d645a9ebd1d858a89cb, type: 3}
   muzzle: {fileID: 5487674402627427572}
+--- !u!114 &5716699300740343351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864009203617676302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3c2a77a491f2446ab4c26121487d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  armor: 0
+  isEnemy: 0
+  entity: {fileID: 8864009203617676302}
+  healthBar: {fileID: 3302615981142902325}
+  onEnemyKilled: {fileID: 0}
+--- !u!65 &8039999373041038344
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864009203617676302}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &9098789892099939370
 GameObject:
   m_ObjectHideFlags: 0

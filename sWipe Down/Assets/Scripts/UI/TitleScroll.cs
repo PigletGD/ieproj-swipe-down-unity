@@ -17,6 +17,10 @@ public class TitleScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private Vector3 startingPos = Vector3.zero;
     private Vector3 endingPos = Vector3.zero;
 
+    public Animator exitAnimator = default;
+
+    private bool switchingScenes = false;
+
     public float ScrollSpeed { get; private set; }
 
     private void Awake()
@@ -25,7 +29,7 @@ public class TitleScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         ScrollSpeed = 0;
 
         startingPos = rectTransform.position;
-        endingPos = startingPos + new Vector3(0f, -1500f, 0f);
+        endingPos = startingPos + new Vector3(0f, -Screen.height, 0f);
     }
 
     private void Update()
@@ -52,17 +56,15 @@ public class TitleScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         isDragging = false;
 
-        Debug.Log(rectTransform.anchoredPosition.y);
-
         if (rectTransform.anchoredPosition.y <= -180)
         {
             thresholdMet = true;
-            ScrollSpeed = -25f;
+            ScrollSpeed = -100f;
         }
         else if (ScrollSpeed <= -12f)
         {
             thresholdMet = true;
-            if (ScrollSpeed > -20f) ScrollSpeed = -25f;
+            if (ScrollSpeed > -80f) ScrollSpeed = -100f;
         }
     }
 
@@ -74,6 +76,8 @@ public class TitleScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private void MoveTitle()
     {
+        if (switchingScenes) return;
+
         rectTransform.position += new Vector3(0f, ScrollSpeed, 0f);
         if(!thresholdMet) ScrollSpeed *= 0.8f;
 
@@ -83,9 +87,18 @@ public class TitleScroll : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             rectTransform.position = lerpingValue;
         }
 
-        if(rectTransform.position.y < endingPos.y)
-        {
-            SceneManager.LoadScene("GameScene");
-        }
+        if (rectTransform.position.y < endingPos.y)
+            StartCoroutine("LoadGameScene");
+    }
+
+    IEnumerator LoadGameScene()
+    {
+        switchingScenes = true;
+
+        exitAnimator.SetTrigger("Exit");
+
+        yield return new WaitForSeconds(0.5f);
+
+        SceneManager.LoadScene("GameScene");
     }
 }

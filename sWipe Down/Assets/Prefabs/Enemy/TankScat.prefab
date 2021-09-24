@@ -739,7 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
-  armor: 1
+  armor: 0
   isEnemy: 1
   entity: {fileID: 3641186141409717720}
   healthBar: {fileID: 8021353722607492721}

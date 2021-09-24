@@ -3,7 +3,12 @@ guid: a618805065298c248afe5017420f78fd
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: JA_Midterms_121720_bathbomb
+    second: {fileID: 2800000, guid: b244851d237bc154493f8180bb645693, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

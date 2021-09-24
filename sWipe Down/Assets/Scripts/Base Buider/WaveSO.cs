@@ -10,4 +10,5 @@ public class WaveSO : ScriptableObject
     public int spawnNumber;
     public int initialMinTimer;
     public int initialMaxTimer;
+    public int spawnDirections;
 }

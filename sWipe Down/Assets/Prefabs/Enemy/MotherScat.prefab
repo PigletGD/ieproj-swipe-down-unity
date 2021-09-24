@@ -634,7 +634,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.4, y: 2.4, z: 2.4}
+  m_Size: {x: 3.5, y: 3.5, z: 3.5}
   m_Center: {x: 0, y: 1.2, z: 0}
 --- !u!54 &3641186141409717717
 Rigidbody:
@@ -664,8 +664,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a5990e2c5037949be0bce3d77b4061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.2
-  maxSpeed: 0.2
+  speed: 0.25
+  maxSpeed: 0.25
   owner: {fileID: 3641186141409717713}
   rb: {fileID: 3641186141409717717}
   baseBuilding: {fileID: 0}
@@ -685,8 +685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3c2a77a491f2446ab4c26121487d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  armor: 1
+  maxHealth: 150
+  armor: 0
   isEnemy: 1
   entity: {fileID: 3641186141409717720}
   healthBar: {fileID: 8021353722607492721}
@@ -703,8 +703,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e7e5bcd2e97c2a449b89eb408a866a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDuration: 10
-  spawnCount: 6
+  spawnDuration: 5
+  spawnCount: 8
   spawnRadius: 3
 --- !u!1 &5877433793821044918
 GameObject:
@@ -732,8 +732,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5877433793821044918}
   m_LocalRotation: {x: -0, y: 0.42261827, z: -0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: -0.757, z: 0}
-  m_LocalScale: {x: 280, y: 280, z: 280}
+  m_LocalPosition: {x: 0, y: -0.964, z: 0}
+  m_LocalScale: {x: 350, y: 350, z: 350}
   m_Children:
   - {fileID: 3271142273612165337}
   - {fileID: 3153978472159767185}

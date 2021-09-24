@@ -5373,7 +5373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 22
-  armor: 1
+  armor: 0
   isEnemy: 1
   entity: {fileID: 6105999648958927365}
   healthBar: {fileID: 677047798286295468}
@@ -5391,7 +5391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: {fileID: 4889810307966884226}
-  fireRateReduction: 0.8
+  fireRateReduction: 0.5
   fireRate: 0.5
 --- !u!1 &7059931240926780037
 GameObject:

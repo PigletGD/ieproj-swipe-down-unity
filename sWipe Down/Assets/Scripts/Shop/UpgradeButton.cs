@@ -8,6 +8,8 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] private IntEvent onCurrencySpent = default;
     [SerializeField] private IntEvent onUpgradeBought = default;
 
+    [SerializeField] private VoidEvent replaceUpgrade = default;
+
     [SerializeField] private string description = default;
     [SerializeField] public int price = 0;
     [SerializeField] public int value = 0;
@@ -32,6 +34,8 @@ public class UpgradeButton : MonoBehaviour
     {
         onCurrencySpent.Raise(price);
         onUpgradeBought.Raise(value);
+
+        replaceUpgrade.Raise();
 
         gameObject.SetActive(false);
     }

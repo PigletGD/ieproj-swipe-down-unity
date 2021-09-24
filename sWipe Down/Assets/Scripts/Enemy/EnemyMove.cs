@@ -53,7 +53,7 @@ public class EnemyMove : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if ((collision.gameObject.tag == "Building" || collision.gameObject.tag == "Base") && timeElapsed > attackRate)
+        if ((collision.gameObject.tag == "Building" || collision.gameObject.tag == "Aroma" || collision.gameObject.tag == "Base") && timeElapsed > attackRate)
         {
             timeElapsed = 0;
             collision.gameObject.GetComponent<HealthComponent>().TakeDamage(1);
@@ -97,7 +97,7 @@ public class EnemyMove : MonoBehaviour
 
     public void AddForcedTarget(Transform foundTarget)
     {
-        if (targetList.Count <= 0) target = foundTarget;
+        target = foundTarget;
 
         targetList.Insert(0, foundTarget);
     }

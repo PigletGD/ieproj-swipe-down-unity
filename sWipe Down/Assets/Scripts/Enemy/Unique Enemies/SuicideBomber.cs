@@ -20,13 +20,15 @@ public class SuicideBomber : MonoBehaviour, IAttackHandler, IDeathHandler
 
         foreach (Collider collider in colliders)
         {
-            HealthComponent healthComponent = collider.gameObject.GetComponent<HealthComponent>();
-            if (healthComponent != null && healthComponent.gameObject != this.gameObject)
+            if (collider.gameObject != null)
             {
-                healthComponent.TakeDamage(damage);
+                HealthComponent healthComponent = collider.gameObject.GetComponent<HealthComponent>();
+                if (healthComponent != null && healthComponent.gameObject != this.gameObject)
+                {
+                    healthComponent.TakeDamage(damage);
+                }
             }
         }
-        Debug.Log("Explode");
     }
 
     public void OnAttack()

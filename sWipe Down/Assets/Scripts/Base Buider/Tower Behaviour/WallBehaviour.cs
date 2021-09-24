@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WallBehaviour : TowerBehaviour
 {
+    public bool isAroma = false;
+
     public override void ExecuteAction()
     {
         Debug.Log("Not supposed to have funtionality");

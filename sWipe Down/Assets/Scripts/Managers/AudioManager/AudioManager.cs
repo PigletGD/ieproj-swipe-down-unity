@@ -26,6 +26,8 @@ public class AudioManager : MonoBehaviour
 
             soundMap.Add(sound.name, sound);
         }
+
+        PlayLoop("GameBGM");
     }
 
     public void Play(string name)
@@ -42,6 +44,25 @@ public class AudioManager : MonoBehaviour
         {
             sound.source.Stop();
         }
+        sound.source.Play();
+    }
+
+    public void PlayLoop(string name)
+    {
+        if (!soundMap.ContainsKey(name))
+        {
+            Debug.LogWarning("Sound " + name + " Not found");
+            return;
+        }
+
+        Sound sound = soundMap[name];
+
+        if (sound.source.isPlaying)
+        {
+            sound.source.Stop();
+        }
+        sound.source.loop = true;
+
         sound.source.Play();
     }
 

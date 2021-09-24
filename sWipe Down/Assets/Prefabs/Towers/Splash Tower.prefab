@@ -43,7 +43,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &536354766
 MonoBehaviour:
@@ -617,7 +617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3c2a77a491f2446ab4c26121487d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 8
   armor: 0
   isEnemy: 0
   entity: {fileID: 7800365577940988191}
@@ -635,14 +635,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2a493cd79e2ca48b58e78d3cc84f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: a872aaee448b3ba499b50fd5f13c89b2, type: 2}
+  stats: {fileID: 11400000, guid: d521ba8c2b430b84fb25f33db907a442, type: 2}
   target: {fileID: 0}
   targetList: []
   targetedList: []
   normalModel: {fileID: 7202314665085465592}
   transparentModel: {fileID: 940020655528838777}
-  fireRate: 1
-  maxFireRate: 1
+  fireRate: 1.5
+  maxFireRate: 1.5
   key: 
   towerValue: 0
   splashCollider: {fileID: 536354767}
@@ -907,7 +907,7 @@ PrefabInstance:
     - target: {fileID: 784745113599647685, guid: ca7a7c62c1e36c44ba40f32858c38334,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.72
+      value: 0.366
       objectReference: {fileID: 0}
     - target: {fileID: 784745113599647685, guid: ca7a7c62c1e36c44ba40f32858c38334,
         type: 3}
@@ -948,6 +948,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998838107190873441, guid: ca7a7c62c1e36c44ba40f32858c38334,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998838107190873441, guid: ca7a7c62c1e36c44ba40f32858c38334,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6933364415499186043, guid: ca7a7c62c1e36c44ba40f32858c38334,
         type: 3}

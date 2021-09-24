@@ -76,14 +76,17 @@ public class BuildingManager : MonoBehaviour
 
         string key = x.ToString() + " " + y.ToString();
 
-        if (!buildingDictionary.ContainsKey(key))
+        if (!buildingDictionary.ContainsKey(key) && CheckLimits(x, y))
         {
             //Debug.Log(key);
-           // Debug.Log(position);
+            // Debug.Log(position);
             //GameObject go = Instantiate(currentBuilding.buildingPrefab, new Vector3(position.x, 0.0f, position.z), Quaternion.identity);
             GameObject GO = objectPools[currentBuildingType].GetObject();
             GO.transform.position = new Vector3(spawnPosition.x, 0.0f, spawnPosition.z);
-            GO.tag = "Building";
+
+            WallBehaviour WB = GO.GetComponent<WallBehaviour>();
+            if (WB != null && WB.isAroma) GO.tag = "Aroma";
+            else GO.tag = "Building";
 
             TowerBehaviour TB = GO.GetComponent<TowerBehaviour>();
             if (TB != null) TB.key = key;
@@ -91,10 +94,12 @@ public class BuildingManager : MonoBehaviour
             buildingDictionary.Add(key, GO);
             gameManager.SpendCurrency(currentBuilding.buildingCost);
 
+            AudioManager.instance.Play("PlaceTower");
+
             if (gameManager.Currency < currentBuilding.buildingCost) ChangeCurrentlySelectedBuilding(-1);
         }
     }
-    
+
     public bool CheckIfTileOccupied(Vector3 position)
     {
         int x = Mathf.RoundToInt(position.x);
@@ -106,15 +111,15 @@ public class BuildingManager : MonoBehaviour
 
         //Debug.Log(key);
 
-        return buildingDictionary.ContainsKey(key);
+        return (buildingDictionary.ContainsKey(key) || !CheckLimits(x, y));
     }
 
     public bool CheckLimits(int x, int y)
     {
-        if (x >= -2 && x <= 0 && y >= -2 && y <= 0)
-            return false;
+        if (x >= -12 && x <= 9 && y >= -11 && y <= 10)
+            return true;
 
-        return true;
+        return false;
     }
 
     public void RemoveBuildingFromDictionary(string key)

@@ -11,9 +11,8 @@ public class HealingTowerBehaviour : TowerBehaviour
         Collider[] colliders = Physics.OverlapSphere(gameObject.transform.position, sphereCollider.radius);
         foreach (Collider collider in colliders)
         {
-            if (collider.gameObject.tag == "Building")
+            if (collider.gameObject.tag == "Building" || collider.gameObject.tag == "Aroma" || collider.gameObject.tag == "Base")
             {
-                Debug.Log("heal");
                 collider.gameObject.GetComponent<HealthComponent>().heal(healValue);
             }
         }

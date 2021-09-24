@@ -66,7 +66,7 @@ public class PaperBehaviour : MonoBehaviour
     {
         if (!isTorn)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y + TS.ScrollSpeed, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y + (TS.ScrollSpeed * 0.6f), transform.position.z);
         }
     }
 
@@ -77,7 +77,7 @@ public class PaperBehaviour : MonoBehaviour
         {
             isTorn = true;
             rb = gameObject.AddComponent<Rigidbody2D>();
-            Vector2 moveVector = new Vector2(0, -100 + (300 * TS.ScrollSpeed));
+            Vector2 moveVector = new Vector2(0, -100 + (300 * TS.ScrollSpeed * 0.6f));
             if (TS.holdingTP) moveVector *= 0.5f;
             rb.velocity = moveVector;
             gameManager.IncrementScore(value);

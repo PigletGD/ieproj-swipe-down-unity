@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BidetTowerBehaviour : TowerBehaviour
 {
+    [SerializeField] bool isPoision = false;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject muzzle;
 
@@ -14,6 +15,13 @@ public class BidetTowerBehaviour : TowerBehaviour
 
         GameObject temp = Instantiate(bullet, muzzle.transform.position, Quaternion.identity);
         temp.transform.LookAt(direction);
+
+        if (isPoision)
+        {
+            targetList.Remove(target);
+            targetList.Add(target);
+            target = targetList[0];
+        }
     }
 
     public override bool ReadyToExecuteAction()

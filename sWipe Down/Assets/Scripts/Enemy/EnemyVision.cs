@@ -11,6 +11,7 @@ public class EnemyVision : MonoBehaviour
     {
         if (other.tag == "Aroma")
         {
+            Debug.Log("Aggro");
             enemy.AddForcedTarget(other.transform);
             other.GetComponent<TowerBehaviour>().targetedList.Add(enemyTransform);
         }
